@@ -21,7 +21,7 @@ var CommentSchema = new Schema({
   created_by: {
     type: String,
     required: true,
-    default: 'northcoder'
+    default: 'TA Raza'
   }
 });
 
