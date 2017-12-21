@@ -1,13 +1,11 @@
 const topicsController = require('../controllers').topics;
-const express = require('express');
-const app = express();
-const topicsRouter = express.Router();
+const topicsRouter = require('express').Router();
 
 topicsRouter.get('/', topicsController.getTopics);
-topicsRouter.get('/:topic_id/article', topicsController.getArticlesFromTopic);
+topicsRouter.get('/:topic_id/articles', topicsController.getArticlesFromTopic);
 
 topicsRouter.use('/*', (req, res) => {
-  res.status(404).send('Page not found');
+  res.status(404).send('Page not found in topics routes');
 });
 
 module.exports = topicsRouter;
