@@ -5,5 +5,11 @@ module.exports ={
   },
   userById (req,res,nex) {
     res.json(`${req.url} is comming soon .....`);
+  },
+  addUser(req,res,next) {
+
+  },
+  removeUser(req,res,next) {
+
   }
 };

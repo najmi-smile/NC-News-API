@@ -5,5 +5,11 @@ module.exports ={
   },
   getArticlesFromTopic(req,res,next) {
     res.json(`${req.url} is comming soon .....`);
+  },
+  addTopic(req,res,next) {
+
+  },
+  removeTopic(req,res,next) {
+    
   }
 };
