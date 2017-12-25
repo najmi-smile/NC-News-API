@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+        <title>Contact Us</title>
+</head>
+
+<body>
+  <header class="page-header">
+      <% include ../partials/header %>
+  </header>
+  <!-- <div class="container">
+      <h1 class="brand"><span>Tahir</span> A Raza</h1>
+  </div> -->
+  <div class="container">
+    <div class="wrapper">
+      <div class="company-info">
+        <h3>TR Web Design</h3>
+        <ul>
+          <li><i class="fa fa-road"></i> Stoke on Trent</li>
+          <li><i class="fa fa-phone"></i>07543151146</li>
+          <li><i class="fa fa-envelope"></i>info@tahirraza.com</li>
+        </ul>
+      </div>
+          <div class="contact">
+              <h3>Email Us</h3>
+              {{msg}}
+              <form id="contact-form" action="send" method="post">
+                  <p>
+                      <label for="name">Name</label>
+                      <input id="name" type="text" name="name" required>
+                  </p>
+                  <p>
+                      <label for="company">Company</label>
+                      <input id="company" type="text" name="company">
+                  </p>
+                  <p>
+                      <label for="Email">Email Address</label >
+                      <input id="email" type="email" name="Email" required>
+                  </p>
+                  <p>
+                      <label for="phone">Phone NO</label>
+                      <input id="phone" type="phone" name="phone">
+                  </p>
+                  <p class="full">
+                      <label for="message">Message</label>
+                      <textarea id="message" name="message" rows="5" required></textarea>
+                  </p>
+                  <p class="full"><button type="submit">Submit</button></p>
+              </form>
+          </div>
+      </div>
+      <footer class="page-footer">
+          <div class="container">
+              <p>Copyright &copy; 11/2017, Tahir Raza</p>
+          </div>
+      </footer>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

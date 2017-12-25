@@ -9,7 +9,7 @@ articlesRouter.get('/:article_id', articles.getArticleById);
 articlesRouter.put('/:article_id', articles.updateArticle);
 articlesRouter.delete('/:article_id', articles.removeArticle);
 
-// articlesRouter.use('/:article_id/comments', commentsRouter);
+//  commentsRouter
 articlesRouter.get('/:article_id/comments', comments.getComments);
 articlesRouter.get('/:article_id/addcomment', comments.addComment);
 articlesRouter.post('/:article_id/addcomment', comments.addComment);
