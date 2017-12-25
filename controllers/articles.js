@@ -1,6 +1,6 @@
 const {Articles} = require('../models/models');
 module.exports ={
-  getarticles (req,res,next) {
+  getArticles (req,res,next) {
     console.log('*** Finding articles in the database ...');
     Articles.find()
     .then(articles => {
@@ -15,10 +15,13 @@ module.exports ={
   getArticleById(req,res,next) {
     res.json(`${req.url} is comming soon .....`);
   },
-  addArticles(req,res,next) {
+  addArticle(req,res,next) {
 
   },
-  removeArticles(req,res,next) {
+  removeArticle(req,res,next) {
+
+  },
+  updateArticle(req,res,next){
     
   }
 };

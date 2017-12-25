@@ -1,10 +1,9 @@
-const express = require('express');
-const apiRouter = express.Router();
-const {articlesRouter,commentsRouter,
-      topicsRouter,usersRouter} = require('./index');
+const apiRouter = require('express').Router();
+// const  = express.;
+const {articlesRouter,
+  topicsRouter,usersRouter} = require('./index');
 
 apiRouter.use('/articles', articlesRouter);
-apiRouter.use('/comments', commentsRouter);
 apiRouter.use('/topics', topicsRouter);
 apiRouter.use('/users', usersRouter);
 

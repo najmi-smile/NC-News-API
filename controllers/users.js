@@ -7,9 +7,12 @@ module.exports ={
     res.json(`${req.url} is comming soon .....`);
   },
   addUser(req,res,next) {
-
+    res.json(`${req.url} is comming soon .....`);
   },
   removeUser(req,res,next) {
-
+    res.json(`${req.url} is comming soon .....`);
+  },
+  updateUser(req,res,next) {
+    res.json(`${req.url} is comming soon .....`);
   }
 };

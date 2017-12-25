@@ -1,11 +1,16 @@
-const articlesController = require('../controllers').articles;
-const commentsController = require('../controllers').comments;
+const {articles} = require('../controllers');
 const articlesRouter = require('express').Router();
+const commentsRouter = require('./comments');
 
-articlesRouter.get('/', articlesController.getarticles);
-articlesRouter.get('/:article_id', articlesController.getArticleById);
-articlesRouter.get('/:article_id/comments', commentsController.getComments);
-articlesRouter.post('/:article_id/comments', commentsController.addComment);
+articlesRouter.get('/', articles.getArticles);
+articlesRouter.get('/add', articles.addArticle);
+articlesRouter.post('/add', articles.addArticle);
+articlesRouter.get('/:article_id', articles.getArticleById);
+articlesRouter.put('/:article_id', articles.updateArticle);
+articlesRouter.delete('/:article_id', articles.removeArticle);
+
+// console.log(commentsRouter)
+articlesRouter.use('/:article_id/comments', commentsRouter);
 
 articlesRouter.use('/*', (req, res) => {
   res.status(404).send('Page not found in articles routes');

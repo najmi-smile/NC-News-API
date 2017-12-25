@@ -3,13 +3,19 @@ module.exports ={
   getComments (req,res,next) {
     res.json(`${req.url} is comming soon .....`);
   },
+  getCommentById (req,res,next) {
+    res.json(`${req.url} is comming soon .....`);
+  },
   addComment (req,res,next) {
     res.json(`${req.url} is comming soon .....`);
   },
   voteComment (req,res,next) {
     res.json(`${req.url} is comming soon .....`);
   },
-  deleteComment(req,res,next) {
+  removeComment(req,res,next) {
+    res.json(`${req.url} is comming soon .....`);
+  },
+  updateComment(req,res,next) {
     res.json(`${req.url} is comming soon .....`);
   }
 };
