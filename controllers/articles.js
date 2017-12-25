@@ -1,4 +1,5 @@
 const {Articles} = require('../models/models');
+
 module.exports ={
   getArticles (req,res,next) {
     console.log('*** Finding articles in the database ...');
@@ -13,7 +14,11 @@ module.exports ={
     .catch(next);
   },
   getArticleById(req,res,next) {
+    console.log('*** Params', req.params);
+    // session.article_id = req.params;
+    console.log(req.session);
     const _id = req.params.article_id;
+    req.session.article_id = _id;
     console.log(`*** Looking for article, ID : ${_id} `);
     Articles.findById(_id)
     .then(article => {
