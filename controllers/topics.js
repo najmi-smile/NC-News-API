@@ -14,7 +14,7 @@ module.exports ={
   },
   getTopic(req,res,next) {
     const _id = req.params.topic_id;
-    console.log(`*** Received a find by ID request, ID : ${_id} `);
+    console.log(`*** Looking for topic, ID : ${_id} `);
     Topics.findById(_id)
     .then(topic => {
       res.json(topic);
@@ -25,7 +25,12 @@ module.exports ={
     res.json(`${req.url} is comming soon .....`);
   },
   addTopic(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    console.log(`*** Wait! Adding topic ... `);
+    const topic = req.body;
+    Topics.create(topic, (err,topic) => {
+      if(err) next(err);
+      res.json(topic);
+    });
   },
   removeTopic(req,res,next) {
     res.json(`${req.url} is comming soon .....`);

@@ -22,7 +22,12 @@ module.exports ={
     .catch(next);
   },
   addUser(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    console.log(`*** Wait! Adding User ... `);
+    const user = req.body;
+    Users.create(user, (err,user) => {
+      if(err) next(err);
+      res.json(user);
+    });
   },
   removeUser(req,res,next) {
     res.json(`${req.url} is comming soon .....`);

@@ -14,7 +14,7 @@ module.exports ={
   },
   getArticleById(req,res,next) {
     const _id = req.params.article_id;
-    console.log(`*** Received a find by ID request, ID : ${_id} `);
+    console.log(`*** Looking for article, ID : ${_id} `);
     Articles.findById(_id)
     .then(article => {
       res.json(article);
@@ -22,7 +22,19 @@ module.exports ={
     .catch(next); 
   },
   addArticle(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    console.log(`*** Wait! Adding article, Title : ${req.body.title} ... `);
+    const belongs_to = req.params.topic_id || req.body.belongs_to;
+    const article = {
+      title : req.body.title,
+      body : req.body.body,
+      belongs_to : belongs_to,
+      votes : req.body.votes,
+      created_by : req.body.created_by
+    }
+    Articles.create(article, (err,article) => {
+      if(err) next(err);
+      res.json(article);
+    })
   },
   removeArticle(req,res,next) {
     res.json(`${req.url} is comming soon .....`);
@@ -34,7 +46,7 @@ module.exports ={
       title : article.title,
       body : article.body
     }
-    console.log(`*** Received a request from ${article.title} ID ${_id} ...`)
+    console.log(`*** Updating article ${article.title} ID ${_id} ...`)
     Articles.findOneAndUpdate(_id,update,{},(err, article) => {
       if (err) next(err);
       res.json(article);

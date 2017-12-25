@@ -22,7 +22,18 @@ module.exports ={
     .catch(next);  
   },
   addComment (req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    console.log(`*** Wait! Adding comment ... `);
+    const belongs_to = req.params.article_id || req.body.belongs_to;
+    const omment = {
+      body : req.body.body,
+      belongs_to : belongs_to,
+      votes : req.body.votes,
+      created_by : req.body.created_by
+    }
+    Comments.create(omment, (err,omment) => {
+      if(err) next(err);
+      res.json(omment);
+    });
   },
   voteComment (req,res,next) {
     res.json(`${req.url} is comming soon .....`);
