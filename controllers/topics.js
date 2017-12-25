@@ -31,6 +31,16 @@ module.exports ={
     res.json(`${req.url} is comming soon .....`);
   },
   updateTopic(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    const _id = req.params.topic_id;
+    const topic = req.body;
+    const update = {
+      title : topic.title,
+      slug : topic.slug
+    }
+    console.log(`*** Received a request from ${topic.title} ID ${_id} ...`)
+    Topics.findOneAndUpdate(_id,update,{},(err, topic) => {
+      if (err) next(err);
+      res.json(topic);
+    });
   }
 };

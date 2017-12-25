@@ -28,6 +28,17 @@ module.exports ={
     res.json(`${req.url} is comming soon .....`);
   },
   updateUser(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    const _id = req.params.user_id;
+    const User = req.body;
+    const update = {
+      username : User.name,
+      name : User.name,
+      avatar_url : User.avatar_url
+    }
+    console.log(`*** Received a request from ${User.name} ID ${_id} ...`)
+    Users.findOneAndUpdate(_id,update,{},(err, user) => {
+      if (err) next(err);
+      res.json(user);
+    });
   }
 };

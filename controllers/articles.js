@@ -28,6 +28,16 @@ module.exports ={
     res.json(`${req.url} is comming soon .....`);
   },
   updateArticle(req,res,next){
-    res.json(`${req.url} is comming soon .....`);
+    const _id = req.params.article_id;
+    const article = req.body;
+    const update = {
+      title : article.title,
+      body : article.body
+    }
+    console.log(`*** Received a request from ${article.title} ID ${_id} ...`)
+    Articles.findOneAndUpdate(_id,update,{},(err, article) => {
+      if (err) next(err);
+      res.json(article);
+    });
   }
 };

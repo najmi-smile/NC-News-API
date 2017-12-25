@@ -31,6 +31,16 @@ module.exports ={
     res.json(`${req.url} is comming soon .....`);
   },
   updateComment(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    const _id = req.params.comment_id;
+    
+    const comment = req.body;
+    const update = {
+      body : comment.body
+    }
+    console.log(`*** Received a request from ID ${_id} ...`)
+    Comments.findOneAndUpdate(_id,update,{},(err, comment) => {
+      if (err) next(err);
+      res.json(comment);
+    });
   }
 };
