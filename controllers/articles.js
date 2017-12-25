@@ -23,7 +23,7 @@ module.exports ={
   },
   addArticle(req,res,next) {
     console.log(`*** Wait! Adding article, Title : ${req.body.title} ... `);
-    const belongs_to = req.params.topic_id || req.body.belongs_to;
+    const belongs_to = req.params.article_id || req.body.belongs_to;
     const article = {
       title : req.body.title,
       body : req.body.body,
@@ -37,7 +37,11 @@ module.exports ={
     })
   },
   removeArticle(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    console.log(`*** Warning! Deleting article ... `);
+    Articles.deleteOne({_id:req.params.article_id}, (err, response) => {
+      if(err) next(err);
+      res.json(response);
+    });
   },
   updateArticle(req,res,next){
     const _id = req.params.article_id;

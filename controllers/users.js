@@ -30,7 +30,11 @@ module.exports ={
     });
   },
   removeUser(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    console.log(`*** Warning! Deleting User ... `);
+    Users.deleteOne({_id:req.params.user_id}, (err, response) => {
+      if(err) next(err);
+      res.json(response);
+    })
   },
   updateUser(req,res,next) {
     const _id = req.params.user_id;

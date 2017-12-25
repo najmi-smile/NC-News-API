@@ -33,7 +33,11 @@ module.exports ={
     });
   },
   removeTopic(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    console.log(`*** Warning! Deleting topic ... `);
+    Topics.deleteOne({_id:req.params.topic_id}, (err, response) => {
+      if(err) next(err);
+      res.json(response);
+    })
   },
   updateTopic(req,res,next) {
     const _id = req.params.topic_id;

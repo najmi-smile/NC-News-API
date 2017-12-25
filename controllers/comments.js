@@ -39,7 +39,11 @@ module.exports ={
     res.json(`${req.url} is comming soon .....`);
   },
   removeComment(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    console.log(`*** Warning! Deleting comment ... `);
+    Comments.deleteOne({_id:req.params.comment_id}, (err, response) => {
+      if(err) next(err);
+      res.json(response);
+    })
   },
   updateComment(req,res,next) {
     const _id = req.params.comment_id;
