@@ -1,0 +1,26 @@
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body > 
+    <div class="container">
+      <header >
+        <% include ../partials/header %>
+      </header>        
+      <main class="jumbotron"> 
+        <div class="row">
+          <% for(let i = 0;i < obj.list_of_articles.length;i++) { %>
+           <div class="col-md-3">
+              <div id="oval_parent">
+                <div id="oval"><a href="articles/<%= obj.list_of_articles[i]._id %>"><%= obj.list_of_articles[i].title %></a></div>
+              </div>
+            </div> 
+          <%}%>
+        </div>
+      </main>        
+      <footer>
+        <% include ../partials/footer %>
+      </footer>      
+    </div>       
+  </body>
+</html>

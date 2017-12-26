@@ -15,13 +15,17 @@ mongoose.connect(db, {useMongoClient: true})
   .then(() => console.log('successfully connected to', db))
   .catch(err => console.log('connection failed', err));
 
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.set('view engine', 'ejs');
 app.use(session({secret:'tahir'}));
 
 // delegate requests to router
+app.get('/', (req,res) => {
+  // res.send('All is well')
+  res.render('/pages/contact.ejs')
+});
 app.use('/api', (req,res) => {
   console.log(`Received a request from ${req.url} method ${req.method}..`);
   console.log('api URL' ,req.params);

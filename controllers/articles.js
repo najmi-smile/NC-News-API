@@ -9,7 +9,8 @@ module.exports ={
         articles_found : articles.length,
         list_of_articles : articles
       }
-      res.json(obj);
+      // res.json(obj);
+      res.render('pages/index',{obj})
     })
     .catch(next);
   },
@@ -39,6 +40,7 @@ module.exports ={
     Articles.create(article, (err,article) => {
       if(err) next(err);
       res.json(article);
+      
     })
   },
   removeArticle(req,res,next) {

@@ -1,18 +1,87 @@
 <html lang="en">
-  <head>
-      <% include ../partials/head %>
-  </head>
-  <body class="container">        
-    <header>
-        <% include ../partials/header %>
-    </header>        
-    <main>
 
-  
-    </main>
+  <head>
+      <% include ../partials/indexHead %>
+  </head>
+
+  <body>
+    <div class="container container-main">
+      <header>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img class="logo" src="/img/logo.png" alt="theBLOG">
+            </div>
+            <div class="col-md-6">
+
+            </div>
+          </div>
+        </div>
+      </header>
+      <main>
+        <% include ../partials/indexheader %>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="well">
+                  <h4>Blog Search</h4>
+                  <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
         
-    <footer>
-        <% include ../partials/footer %>
-    </footer>        
+                <div class="well">
+                  <h4>Categories</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <ul class="list-unstyled">
+                        <li><a href="#">Category Name</a>
+                        </li>
+                        <li><a href="#">Category Name</a>
+                        </li>
+                      </ul>
+                    </div>
+                     <div class="col-md-6">
+                      <ul class="list-unstyled">
+                        <li><a href="#">Category Name</a>
+                        </li>
+                        <li><a href="#">Category Name</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="well">
+                  <h4>Sidebar Widget</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                </div>
+            </div>
+          <% for(let i = obj.list_of_articles.length-1;i > obj.list_of_articles.length - 2; i--) { %>
+            <div class="col-md-8">
+              <div class="well blog-post">
+                <h3><a href="#">Blog Post By <%=obj.list_of_articles[i].created_by %> </a></h3>
+                <p class="post-info"><i class="glyphicon glyphicon-time"></i> Posted by Tahir Raza on Dec 21, 2017 at 2:00 PM</p>
+                <hr>
+                <img src="/img/blog1.jpg" class="img-responsive">
+                <hr>
+                <p><%= obj.list_of_articles[i].title %></p>
+                <a class="btn btn-primary" href="<%= obj.list_of_articles[i]._id %>">Read More <span class="glyphicon glyphicon-chevron-right"></a>
+              </div>
+            </div>          
+          <% } %>
+          
+        </div>
+      </main>
+      <footer>
+          <% include ../partials/footer %>
+      </footer>
+
+    </div>
+    <!-- container container-main -->
   </body>
 </html>
