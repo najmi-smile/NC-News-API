@@ -1,4 +1,4 @@
-const {Articles} = require('../models/models');
+const {Articles,Topics} = require('../models/models');
 
 module.exports ={
   getArticles (req,res,next) {
@@ -10,9 +10,26 @@ module.exports ={
         list_of_articles : articles
       }
       // res.json(obj);
-      res.render('pages/index',{obj})
+      res.render('pages/articles',{obj})
     })
     .catch(next);
+
+    // Topics.find()
+    // let articlesOfSpecificTopic = {}
+    // .then(topics => {
+    //   // console.log('***', topics);
+    //   topics.forEach(topic => {
+    //     Articles.find({belongs_to: topic.slug})
+    //     .then(articles => {
+    //       articlesOfSpecificTopic[topic.slug] = articles;
+    //       // res.send(articlesOfSpecificTopic);
+    //     })
+    //     // .catch(next);
+    //   })
+    //   console.log('***', articlesOfSpecificTopic);
+    //   res.send(articlesOfSpecificTopic);
+    // })
+    // .catch(next);
   },
   getArticleById(req,res,next) {
     console.log('*** Params', req.params);

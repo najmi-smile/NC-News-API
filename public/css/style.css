@@ -76,9 +76,13 @@ body {
 	float:left;
 	margin-right:5px;
 }*/
-
+.size{
+	/* width: 250px;
+	height: 250px; */
+	margin-top: 10px; 
+}
 .post-info{
-	background:#333;
+	background:#22cdeb;
 	color:#fff;
 	padding:5px;
 	border:#ccc 1px solid;

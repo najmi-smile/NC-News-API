@@ -3,6 +3,9 @@ const apiRouter = require('express').Router();
 const {articlesRouter,
   topicsRouter,usersRouter} = require('./index');
 
+apiRouter.get('/', (req,res,next) => {
+  res.render('pages')
+});
 apiRouter.use('/articles', articlesRouter);
 apiRouter.use('/topics', topicsRouter);
 apiRouter.use('/users', usersRouter);
