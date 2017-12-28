@@ -88,6 +88,55 @@ body {
 	border:#ccc 1px solid;
 	border-radius: 5px;
 }
+/* Form getInTouch */
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+/*panel heading*/
+.panel-default > .panel-heading h3 {
+    text-align:center;
+    font-size: 28px;
+    font-family: 'Lobster', cursive;
+}
+/*panel align center*/
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    padding-top:5px;
+}
+/*property for the bootstrap panel*/
+.panel  {
+-webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+-moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.panel-default > .panel-heading {
+  color: #000 !important;
+  background: #80bfff; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #80bfff, #ffffff); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #80bfff, #ffffff); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #80bfff, #ffffff); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #80bfff, #ffffff); /* Standard syntax */
+  border-color: #99ccff !important;
+  height:80px;
+}
+
+/*property for the HTML input placeholder*/
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+
+/*property for reset button*/
+button[type="reset"]    {
+    background-color:transparent;
+    border:1px solid black;
+}
+
+/*Glyphicon color*/
+.blue   {
+    color: #80bfff;
+}
 
 @media(min-width:992px){
 	#myCarousel{padding-right:33.3333%;}
@@ -101,3 +150,4 @@ body {
 @media(max-width:1200px){
 	.slider-list p{display:none;}
 } 
+
