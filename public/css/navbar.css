@@ -8,54 +8,9 @@
 .menu { 
   display:none;
 }
-
-@media all and (max-width:768px){
-    
-.navbar-default .drop_menu {
-  display: block;
-  visibility: visible;
-  width: 110px;
-  height:1000px;
-  padding:0px 20px;
-  position: absolute;
-  right:-100px;
-  transition:all ease 0.5s;
-  border-top: 0px solid;
-  cursor: pointer;
-
+form input {
+  border-radius: 5px;
 }
-
-a.menu { 
-  display:block !important;
-  margin: 9px 2px;
-  float: right;
-  color: #00bcd4; 
-  border:0px solid; 
-  background:none; 
-  font-size:30px;
-  width:27px;
-  position: relative;
-  cursor:pointer;
-}
-
-.drop_menu1 { 
-  display: block;
-  visibility: visible;
-  width:250px;
-  height:1000px;
-  padding:5px 30px;
-  position: absolute;
-  right:0 !important;
-  background-color: #0e364c !important; 
-  transition:all ease 0.5s;
-  border-top: 0px solid;
-  cursor: pointer;
-  top: 50px;
-
-}
-
-}
-
 /*login register*/
 
 @import url(http://fonts.googleapis.com/css?family=Roboto);
@@ -136,4 +91,50 @@ a.menu {
 } 
 .login-help{
   font-size: 12px;
+}
+@media all and (max-width:768px){
+    
+  .navbar-default .drop_menu {
+    display: block;
+    visibility: visible;
+    width: 110px;
+    height:1000px;
+    padding:0px 20px;
+    position: absolute;
+    right:-100px;
+    transition:all ease 0.5s;
+    border-top: 0px solid;
+    cursor: pointer;
+
+  }
+
+  a.menu { 
+    display:block !important;
+    margin: 9px 2px;
+    float: right;
+    color: #00bcd4; 
+    border:0px solid; 
+    background:none; 
+    font-size:30px;
+    width:27px;
+    position: relative;
+    cursor:pointer;
+  }
+
+  .drop_menu1 { 
+    display: block;
+    visibility: visible;
+    width:250px;
+    height:1000px;
+    padding:5px 30px;
+    position: absolute;
+    right:0 !important;
+    background-color: #0e364c !important; 
+    transition:all ease 0.5s;
+    border-top: 0px solid;
+    cursor: pointer;
+    top: 50px;
+    
+
+  }
 }

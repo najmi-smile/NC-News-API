@@ -10,53 +10,24 @@
       <ul class="nav navbar-nav">
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-font"></span> About</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-heart-empty"></span> Gallery</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-phone"></span> Contact</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#contact-modal"><span class="glyphicon glyphicon-phone" ></span> Contact</a></li>
       </ul><!--nav navbar-nav close-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" data-toggle="modal" data-target="#signup-modal"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li><a href="#" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul><!--navbar-right close-->
+      
     </div><!--collapse navbar-collapse drop_menu close-->
   </div><!--container-fluid close-->
 </nav><!--navbar navbar-inverse close-->
 <hr>
+<% include ./getInTouch %>
+<% include ./login %>
+<% include ./signUp %>
 
 
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="log-section">
-      <h1>Login to Your Account</h1><br>
-      <form>
-        <input type="text" name="user" placeholder="Username">
-        <input type="password" name="pass" placeholder="Password">
-        <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-      </form>      
-      <div class="login-help">
-        <a href="#">Register</a> - <a href="#">Forgot Password</a>
-      </div>
-		</div>
-	</div>
-</div>     
           
-<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="log-section">
-      <h1>sign up for new Account</h1><br>
-      <form>
-        <input type="text" name="name" placeholder="First Name">
-        <input type="text" name="name" placeholder="Last Name">
-        <input type="password" name="pass" placeholder="Create Password">
-        <input type="password" name="pass" placeholder="confiram Password">
-        <input type="submit" name="signin" class="login loginmodal-submit" value="Sign Up">
-      </form>
-      <div class="login-help">
-        <a href="#">Allready Have an Account</a>
-      </div>
-    </div>
-  </div>
-</div>
-					
+		
 
 
 
