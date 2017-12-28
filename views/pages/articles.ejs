@@ -15,14 +15,14 @@
           <div class="col-md-8">
             <div class="row">
               <% for(let i = obj.list_of_articles.length-1;i >= 0; i--) { %>
-                <div class="col-md-4 size">
+                <div class="col-md-6 size">
                   <div class="well blog-post">
                     <!-- <h3><a href="#">Blog Post About <%=obj.list_of_articles[i].belongs_to %> </a></h3> -->
-                    <p class="post-info"><i class="glyphicon glyphicon-user"></i>  Posted by <%=obj.list_of_articles[i].created_by %></p>
+                    <p><strong>Topic </strong><small><%= (obj.list_of_articles[i].belongs_to) %></small></p>
+                    <p class="post-info"><i class="glyphicon glyphicon-user"></i>  Posted by <%=obj.list_of_articles[i].title %></p>
                     <!-- <hr>
                     <img src="/img/blog1.jpg" class="img-responsive">
                     <hr> -->
-                    <p><%= obj.list_of_articles[i].belongs_to %></p>
                     <a class="btn btn-primary" href="articles/<%= obj.list_of_articles[i]._id %>">Read More <span class="glyphicon glyphicon-chevron-right"></a>
                   </div>
                 </div>
@@ -34,7 +34,7 @@
               <% include ../partials/search %>
             </div>
             <div class="well">
-              <h4>Categories</h4>
+              <h2><i class="fa fa-users" aria-hidden="true"> Users</i></h2>
               <div class="row">
                 <div class="col-md-6">
                   <ul class="list-unstyled">

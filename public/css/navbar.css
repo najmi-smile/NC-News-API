@@ -1,5 +1,12 @@
+.navbar{
+	margin-bottom:20px;
+	border-radius:0;
+	border:0;
+  background:#f4f4f4;
+	
+}
 .navbar-default .navbar-nav>li>a {
-  color:#424141;
+  color:#424141;  
   font-family: 'Open Sans', sans-serif;
 }
 .navbar-default .navbar-brand { 
