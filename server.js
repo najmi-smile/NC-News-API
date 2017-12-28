@@ -24,7 +24,7 @@ app.use(session({secret:'tahir'}));
 // delegate requests to router
 app.get('/', (req,res) => {
   // res.send('All is well')
-  res.render('/pages/contact.ejs')
+  res.render('pages/contact')
 });
 app.use('/api', (req,res) => {
   console.log(`Received a request from ${req.url} method ${req.method}..`);

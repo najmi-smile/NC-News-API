@@ -4,11 +4,10 @@ module.exports ={
     console.log('*** Finding topics in the database ...');
     Topics.find()
     .then(topics => {
-      const obj ={
-        topics_found : topics.length,
-        list_of_topics : topics
-      }
-      res.json(obj);
+      req.session.topics = topics;
+      // console.log('+++',req.session.topics);
+      res.redirect('api');
+      // res.json(obj);
     })
     .catch(next);
   },

@@ -1,7 +1,7 @@
 <html lang="en">
 
   <head>
-      <% include ../partials/indexHead %>
+      <% include ../partials/linkFiles %>
   </head>
 
   <body>
@@ -23,7 +23,7 @@
                     <img src="/img/blog1.jpg" class="img-responsive">
                     <hr> -->
                     <p><%= obj.list_of_articles[i].belongs_to %></p>
-                    <a class="btn btn-primary" href="<%= obj.list_of_articles[i]._id %>">Read More <span class="glyphicon glyphicon-chevron-right"></a>
+                    <a class="btn btn-primary" href="articles/<%= obj.list_of_articles[i]._id %>">Read More <span class="glyphicon glyphicon-chevron-right"></a>
                   </div>
                 </div>
               <% } %>
@@ -64,8 +64,9 @@
       <footer>
         <% include ../partials/footer %>
       </footer>
-
+      
     </div>
     <!-- container container-main -->
+    <% include ../partials/scriptFiles %>
   </body>
 </html>
