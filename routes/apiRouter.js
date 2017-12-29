@@ -1,22 +1,25 @@
 const apiRouter = require('express').Router();
-const {articles,comments,topics} = require('../controllers');
+const {articles,comments,topics,users} = require('../controllers');
 
 // const  = express.;
 const {articlesRouter,
   topicsRouter,usersRouter} = require('./index');
 
 apiRouter.get('/', (req,res,next) => {
-  // console.log(req.session);
-  if(!req.session.topics){
-    topics.getTopics(req,res,next);
-  } else {
-    const topics = req.session.topics
-    console.log('*** Topics found in database ',topics);
-    res.render('pages',{topics});
-  }
-  // .then(err => {
-  //   res.render('pages')
-  // })
+  console.log('*** Setting up the for required data ...');
+  users.getUsersForIndexPage(req,res,next)
+  .then(users => {
+    console.log('*** Users found in database ',users.length);
+    req.session.users = users;
+    return topics.getTopics(req,res,next)
+  })
+  .then(topics => {
+    console.log('*** Topics found in database ',topics.length);
+    const Users = req.session.users;
+    const Topics = topics;
+    res.render('pages',{Users,Topics});
+  })
+  .catch(next);
 });
 apiRouter.use('/articles', articlesRouter);
 apiRouter.use('/topics', topicsRouter);

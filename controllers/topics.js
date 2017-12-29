@@ -2,12 +2,9 @@ const {Topics} = require('../models/models');
 module.exports ={
   getTopics (req,res,next) {
     console.log('*** Finding topics in the database ...');
-    Topics.find()
+    return Topics.find()
     .then(topics => {
-      req.session.topics = topics;
-      // console.log('+++',req.session.topics);
-      res.redirect('api');
-      // res.json(obj);
+      return topics;
     })
     .catch(next);
   },

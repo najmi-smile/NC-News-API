@@ -4,11 +4,15 @@ module.exports ={
     console.log('*** Finding users in the database ...');
     Users.find()
     .then(users => {
-      const obj ={
-        users_found : users.length,
-        list_of_users : users
-      }
-      res.json(obj);
+      res.json(users);
+    })
+    .catch(next);
+  },
+  getUsersForIndexPage (req,res,next) {
+    console.log('*** Finding users in the database ...');
+    return Users.find()
+    .then(users => {
+      return users;
     })
     .catch(next);
   },
