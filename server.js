@@ -10,7 +10,6 @@ mongoose.Promise = Promise;
 const apiRouter = require('./routes/apiRouter');
 const url = require('url');
 const session    = require('express-session');
-const moment = require('moment');
 
 mongoose.connect(db, {useMongoClient: true})
   .then(() => console.log('successfully connected to', db))
@@ -21,7 +20,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(session({secret:'tahir'}));
-// app.use(moment);
 
 // delegate requests to router
 app.get('/', (req,res) => {

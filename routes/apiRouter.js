@@ -27,7 +27,8 @@ apiRouter.get('/', (req,res,next) => {
     console.log(`*** ${data['comments'].length} Comments found for ${data['article']._id} in database `);
     obj['article'] = data['article'];
     obj['comments'] = data['comments'];
-    res.render('pages',{obj,moment});
+    obj['moment'] = moment;
+    res.render('pages',{obj});
   })
   .catch(next);
 });

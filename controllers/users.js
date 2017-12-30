@@ -1,4 +1,6 @@
 const {Users} = require('../models/models');
+const moment = require('moment');
+
 module.exports ={
   getUsers (req,res,next) {
     console.log('*** Finding users in the database ...');
@@ -16,12 +18,13 @@ module.exports ={
     })
     .catch(next);
   },
-  userById (req,res,next) {
-    const _id = req.params.user_id;
-    console.log(`*** Received a find by ID request, ID : ${_id} `);
-    Users.findById(_id)
+  userByName (req,res,next) {
+    const username = req.params.user_name;
+    console.log(`*** Received a find by username request, UserName : ${username} `);
+    Users.find({username : req.params.user_name})
     .then(user => {
-      res.json(user);
+      user = user.pop();
+      res.render('pages/userDisplay',{user,moment});
     })
     .catch(next);
   },
