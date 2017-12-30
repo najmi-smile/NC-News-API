@@ -1,13 +1,13 @@
-const {Articles,Topics} = require('../models/models');
+const {Articles,Topics, Comments} = require('../models/models');
 
 module.exports ={
   getArticles (req,res,next) {
-    
     console.log('*** Finding articles in the database ...');
     console.log('*** Query', req.query);
     if(req.query){
       Articles.find({belongs_to : req.query.topic })
       .then(articles => {
+        // console.log('*** articles in model', articles);
         const obj ={
           articles_found : articles.length,
           list_of_articles : articles
@@ -28,23 +28,22 @@ module.exports ={
       })
       .catch(next);      
     }
-
-    // Topics.find()
-    // let articlesOfSpecificTopic = {}
-    // .then(topics => {
-    //   // console.log('***', topics);
-    //   topics.forEach(topic => {
-    //     Articles.find({belongs_to: topic.slug})
-    //     .then(articles => {
-    //       articlesOfSpecificTopic[topic.slug] = articles;
-    //       // res.send(articlesOfSpecificTopic);
-    //     })
-    //     // .catch(next);
-    //   })
-    //   console.log('***', articlesOfSpecificTopic);
-    //   res.send(articlesOfSpecificTopic);
-    // })
-    // .catch(next);
+  },
+  getArticlesForIndexPage (req,res,next) {
+    let article;
+    console.log('*** Fetching latest article ...');
+      return Articles.find().limit(1).sort({$natural:-1})
+      .then(data => {
+        article =  data.pop();
+        return article;
+      })
+      .then(article => {
+        return Comments.find({belongs_to : article._id})
+        .then(comments => {
+          return {article,comments};
+        })
+      })
+      .catch(next);
   },
   getArticleById(req,res,next) {
     console.log('*** Params', req.params);

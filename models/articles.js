@@ -22,6 +22,14 @@ var ArticleSchema = new Schema({
   created_by: {
     type: String,
     lowercase: true
+  }, 
+  created_at: {
+    type: Number,
+    default: new Date().getTime()
+  },
+  img_url: {
+    type: String,
+    lowercase: true
   }
 });
 

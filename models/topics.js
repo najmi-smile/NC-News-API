@@ -10,6 +10,10 @@ var TopicSchema = new Schema({
     type: String,
     lowercase: true,
     required: true
+  },
+  created_at: {
+    type: Number,
+    default: new Date().getTime()
   }
 });
 

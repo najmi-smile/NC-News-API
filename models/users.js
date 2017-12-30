@@ -15,6 +15,10 @@ var UserSchema = new Schema({
     type: String,
     required: true,
     lowercase: true
+  },
+  created_at: {
+    type: Number,
+    default: new Date().getTime()
   }
 });
 

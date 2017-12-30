@@ -1,9 +1,9 @@
 <h4>Users</h4>
 <div class="row">
   <ul class="list-unstyled">
-    <% for(let i = 0;i < Users.length; i++) { %>
+    <% for(let i = 0;i < obj['users'].length; i++) { %>
       <div class="col-md-6">
-        <li><a href="api/users/<%= Users[i]._id %>"><%= Users[i].username %></a></li>
+        <li><a href="api/users/<%= obj['users'][i]._id %>"><%= obj['users'][i].username %></a></li>
       </div>
     <% } %>
   </ul>                

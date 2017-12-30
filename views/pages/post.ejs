@@ -1,0 +1,25 @@
+<article>
+    <header>
+     <h2>Latest Post</h2> 
+     <small><%= obj['article'].title %></small>
+     <a href="#"> <p><span class = "fa fa-user"></span> <%= obj['article'].created_by %> </p></a>
+      <hr>                  
+    </header>
+    
+      <div class="img blog-post">
+        <img src=<%= obj['article'].img_url || "/img/blog3.jpg" %> alt="Blog img">                  
+      </div>
+      <br>
+      <p><%= obj['article'].body  %></p>
+      <hr>
+    <footer>
+      <div class="row">
+        <div class="col-md-6">
+          <i class="fa fa-pencil" aria-hidden="true"> <%= obj['comments'].length %> Comments</i>
+        </div>
+        <div class="col-md-6">
+          <i class="fa fa-clock-o" aria-hidden="true"> <%= moment(new Date(obj['article'].created_at), "YYYYMMDD").fromNow() %></i>
+        </div>
+      </div>
+    </footer>
+  </article>
