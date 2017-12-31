@@ -4,20 +4,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-// let db;
-// if(process.env.NODE_ENV === 'dev'){
-//   const config = require('./config');
-//   db =  config.DB[process.env.NODE_ENV];
-// } else {
-//   db =  process.env.DB;
-// }
+// const config = require('./config');
+
+// const db = config.DB[process.env.NODE_ENV] || process.env.DB;
 mongoose.Promise = Promise;
 const apiRouter = require('./routes/apiRouter');
 const url = require('url');
 const session    = require('express-session');
 
-mongoose.connect(process.env.DB, {useMongoClient: true})
-  .then(() => console.log('successfully connected to', db))
+mongoose.connect(process.env.mLab, {useMongoClient: true})
+  .then(() => console.log('successfully connected to remote database'))
   .catch(err => console.log('connection failed', err));
 
 app.set('view engine', 'ejs');
