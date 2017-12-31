@@ -4,11 +4,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
+let db;
 if(process.env.NODE_ENV === 'dev'){
   const config = require('./config');
-  const db =  process.env.DB || config.DB[process.env.NODE_ENV];
+  db =  config.DB[process.env.NODE_ENV];
 } else {
-  const db =  process.env.DB;
+  db =  process.env.DB;
 }
 mongoose.Promise = Promise;
 const apiRouter = require('./routes/apiRouter');
