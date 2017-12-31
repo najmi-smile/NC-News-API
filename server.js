@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 const app = express();
 if(process.env.NODE_ENV === 'dev'){
   const config = require('./config');
+  const db =  process.env.DB || config.DB[process.env.NODE_ENV];
+} else {
+  const db =  process.env.DB;
 }
-const db =  process.env.DB || config.DB[process.env.NODE_ENV];
 mongoose.Promise = Promise;
 const apiRouter = require('./routes/apiRouter');
 const url = require('url');
