@@ -1,5 +1,5 @@
-config1.js
 config.js
+seed/*
 .idea/*
 node_modules/*
 .DS_Store
