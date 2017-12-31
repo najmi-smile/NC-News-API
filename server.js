@@ -4,19 +4,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-let db;
-if(process.env.NODE_ENV === 'dev'){
-  const config = require('./config');
-  db =  config.DB[process.env.NODE_ENV];
-} else {
-  db =  process.env.DB;
-}
+// let db;
+// if(process.env.NODE_ENV === 'dev'){
+//   const config = require('./config');
+//   db =  config.DB[process.env.NODE_ENV];
+// } else {
+//   db =  process.env.DB;
+// }
 mongoose.Promise = Promise;
 const apiRouter = require('./routes/apiRouter');
 const url = require('url');
 const session    = require('express-session');
 
-mongoose.connect(db, {useMongoClient: true})
+mongoose.connect(process.env.DB, {useMongoClient: true})
   .then(() => console.log('successfully connected to', db))
   .catch(err => console.log('connection failed', err));
 
