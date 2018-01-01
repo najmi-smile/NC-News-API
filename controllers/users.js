@@ -1,4 +1,4 @@
-const {Users} = require('../models/models');
+const {Users,Register} = require('../models/models');
 const moment = require('moment');
 
 module.exports ={
@@ -29,9 +29,9 @@ module.exports ={
     .catch(next);
   },
   addUser(req,res,next) {
-    console.log(`*** Wait! Adding User ... `);
+    console.log(`*** Wait! Registering User ... `);
     const user = req.body;
-    Users.create(user, (err,user) => {
+    Register.create(user, (err,user) => {
       if(err) next(err);
       res.json(user);
     });

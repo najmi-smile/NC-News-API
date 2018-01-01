@@ -39,9 +39,11 @@ apiRouter.get('/contact', (req,res,next)=>{
 });
 apiRouter.post('/contact', (req,res,next) => {
   console.log('post body',req.body);
+  res.json('All is well');
 });
 apiRouter.post('/signup', (req,res,next) => {
   console.log('post body',req.body);
+  res.json('All is well');
 });
 apiRouter.use('/articles', articlesRouter);
 apiRouter.use('/topics', topicsRouter);
