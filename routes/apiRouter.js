@@ -33,7 +33,16 @@ apiRouter.get('/', (req,res,next) => {
   .catch(next);
 });
 
-
+apiRouter.get('/contact', (req,res,next)=>{
+  // res.send('ALl Good');
+  res.render('pages/contactUs');
+});
+apiRouter.post('/contact', (req,res,next) => {
+  console.log('post body',req.body);
+});
+apiRouter.post('/signup', (req,res,next) => {
+  console.log('post body',req.body);
+});
 apiRouter.use('/articles', articlesRouter);
 apiRouter.use('/topics', topicsRouter);
 apiRouter.use('/users', usersRouter);
