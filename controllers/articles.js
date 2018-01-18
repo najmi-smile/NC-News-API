@@ -12,8 +12,8 @@ module.exports ={
           articles_found : articles.length,
           list_of_articles : articles
         }
-        // res.json(obj);
-        res.render('pages/articles',{obj})
+        res.json(obj);
+        // res.render('pages/articles',{obj})
       })
       .catch(next);
     } else {
@@ -23,8 +23,8 @@ module.exports ={
           articles_found : articles.length,
           list_of_articles : articles
         }
-        // res.json(obj);
-        res.render('pages/articles',{obj})
+        res.json(obj);
+        // res.render('pages/articles',{obj})
       })
       .catch(next);      
     }

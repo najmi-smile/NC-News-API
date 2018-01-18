@@ -14,7 +14,8 @@ module.exports ={
     console.log('*** Finding users in the database ...');
     return Users.find()
     .then(users => {
-      return users;
+      // return users;
+      res.json(users);
     })
     .catch(next);
   },
@@ -24,7 +25,8 @@ module.exports ={
     Users.find({username : req.params.user_name})
     .then(user => {
       user = user.pop();
-      res.render('pages/userDisplay',{user,moment});
+      res.json(user);
+      // res.render('pages/userDisplay',{user,moment});
     })
     .catch(next);
   },

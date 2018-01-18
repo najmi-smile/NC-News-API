@@ -4,7 +4,7 @@ module.exports ={
     console.log('*** Finding topics in the database ...');
     return Topics.find()
     .then(topics => {
-      return topics;
+      res.json(topics);
     })
     .catch(next);
   },

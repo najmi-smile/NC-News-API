@@ -1,5 +1,7 @@
 if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev';
 
+const expressValidator = require('express-validator');
+const cookieParser = require('cookie-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -16,9 +18,28 @@ mongoose.connect(process.env.mLab, {useMongoClient: true})
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({extended:true}));
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(cookieParser());
+
 app.use(session({secret:'tahir'}));
+// validator
+app.use(expressValidator({
+  errorFormatter: (param,msg,value) =>{
+    let namespace = param.split('.'),
+        root = namespace.shift(),
+        formParam = root;
+        while(namespace.length){
+          formParam += '[' + namespace.shift() + ']';
+        }
+        return {
+          param :formParam,
+          msg : msg,
+          value : value
+        };
+  }
+}));
 
 // delegate requests to router
 app.get('/', (req,res) => {

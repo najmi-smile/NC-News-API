@@ -43,7 +43,20 @@ apiRouter.post('/contact', (req,res,next) => {
 });
 apiRouter.post('/signup', (req,res,next) => {
   console.log('post body',req.body);
-  res.json('All is well');
+  const name = req.body.firstname + ' ' + req.body.lastname,
+        username = req.body.username,
+        avatar_url = req.body.avatar_url,
+        email = req.body.email,
+        password = req.body.pass1,
+        confirm_pass = req.body.pass2;
+
+  req.checkBody(password, 'password should be equal').equals(confirm_pass);
+  const err = req.validationErrors();
+  if(err){
+    res.json(err);
+  } else {
+    res.json('All is well');
+  }
 });
 apiRouter.use('/articles', articlesRouter);
 apiRouter.use('/topics', topicsRouter);
