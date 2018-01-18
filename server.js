@@ -43,8 +43,8 @@ app.use(expressValidator({
 
 // delegate requests to router
 app.get('/', (req,res) => {
-  // res.send('All is well')
-  res.render('pages/contact')
+  res.send('Please use /api')
+  // res.render('pages/contact')
 });
 app.use('/api', (req,res) => {
   console.log(`Received a request from ${req.url} method ${req.method}..`);
