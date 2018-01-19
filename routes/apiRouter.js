@@ -11,7 +11,7 @@ apiRouter.get('/', (req,res,next) => {
   const obj = {
     status : 'Ok'
   };
-  res.json();
+  res.json(obj);
   // users.getUsersForIndexPage(req,res,next)
   // .then(users => {
   //   console.log('*** Users found in database ',users.length);
