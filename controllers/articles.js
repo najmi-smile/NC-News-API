@@ -27,7 +27,6 @@ module.exports ={
         // res.render('pages/articles',{obj})
       })
       .catch(next);      
-    }
   },
   getArticlesForIndexPage (req,res,next) {
     let article;
