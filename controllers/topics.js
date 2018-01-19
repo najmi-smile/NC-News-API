@@ -1,4 +1,4 @@
-const {Topics} = require('../models/models');
+const {Topics,Articles} = require('../models/models');
 module.exports ={
   getTopics (req,res,next) {
     console.log('*** Finding topics in the database ...');
@@ -18,7 +18,18 @@ module.exports ={
     .catch(next);
   },
   getArticlesFromTopic(req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    Articles.find({belongs_to : req.params.topic_id })
+      .then(articles => {
+        // console.log('*** articles in model', articles);
+        const obj ={
+          articles_found : articles.length,
+          list_of_articles : articles
+        }
+        res.json(obj);
+        // res.render('pages/articles',{obj})
+      })
+      .catch(next);
+    // res.json(`${req.url} is comming soon .....`);
   },
   addTopic(req,res,next) {
     console.log(`*** Wait! Adding topic ... `);
