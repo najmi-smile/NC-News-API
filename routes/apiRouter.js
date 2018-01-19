@@ -8,56 +8,59 @@ const {articlesRouter,
 
 apiRouter.get('/', (req,res,next) => {
   console.log('*** SetUp initialized ...');
-  const obj = {};
-  users.getUsersForIndexPage(req,res,next)
-  .then(users => {
-    console.log('*** Users found in database ',users.length);
-    // req.session.users = users;
-    obj['users'] = users;
-    return topics.getTopics(req,res,next);
-  })
-  .then(topics => {
-    // req.session.topics = topics;
-    obj['topics'] = topics;
-    console.log('*** Topics found in database ',obj['topics'].length);
+  const obj = {
+    status : 'Ok'
+  };
+  res.json();
+  // users.getUsersForIndexPage(req,res,next)
+  // .then(users => {
+  //   console.log('*** Users found in database ',users.length);
+  //   // req.session.users = users;
+  //   obj['users'] = users;
+  //   return topics.getTopics(req,res,next);
+  // })
+  // .then(topics => {
+  //   // req.session.topics = topics;
+  //   obj['topics'] = topics;
+  //   console.log('*** Topics found in database ',obj['topics'].length);
     
-    return articles.getArticlesForIndexPage(req,res,next);
-  })
-  .then(data => {
-    console.log(`*** ${data['comments'].length} Comments found for ${data['article']._id} in database `);
-    obj['article'] = data['article'];
-    obj['comments'] = data['comments'];
-    obj['moment'] = moment;
-    res.render('pages',{obj});
-  })
-  .catch(next);
+  //   return articles.getArticlesForIndexPage(req,res,next);
+  // })
+  // .then(data => {
+  //   console.log(`*** ${data['comments'].length} Comments found for ${data['article']._id} in database `);
+  //   obj['article'] = data['article'];
+  //   obj['comments'] = data['comments'];
+  //   obj['moment'] = moment;
+  //   res.render('pages',{obj});
+  // })
+  // .catch(next);
 });
 
-apiRouter.get('/contact', (req,res,next)=>{
-  // res.send('ALl Good');
-  res.render('pages/contactUs');
-});
-apiRouter.post('/contact', (req,res,next) => {
-  console.log('post body',req.body);
-  res.json('All is well');
-});
-apiRouter.post('/signup', (req,res,next) => {
-  console.log('post body',req.body);
-  const name = req.body.firstname + ' ' + req.body.lastname,
-        username = req.body.username,
-        avatar_url = req.body.avatar_url,
-        email = req.body.email,
-        password = req.body.pass1,
-        confirm_pass = req.body.pass2;
+// apiRouter.get('/contact', (req,res,next)=>{
+//   // res.send('ALl Good');
+//   res.render('pages/contactUs');
+// });
+// apiRouter.post('/contact', (req,res,next) => {
+//   console.log('post body',req.body);
+//   res.json('All is well');
+// });
+// apiRouter.post('/signup', (req,res,next) => {
+//   console.log('post body',req.body);
+//   const name = req.body.firstname + ' ' + req.body.lastname,
+//         username = req.body.username,
+//         avatar_url = req.body.avatar_url,
+//         email = req.body.email,
+//         password = req.body.pass1,
+//         confirm_pass = req.body.pass2;
 
-  req.checkBody(password, 'password should be equal').equals(confirm_pass);
-  const err = req.validationErrors();
-  if(err){
-    res.json(err);
-  } else {
-    res.json('All is well');
-  }
-});
+//   req.checkBody(password, 'password should be equal').equals(confirm_pass);
+//   const err = req.validationErrors();
+//   if(err){
+//     res.json(err);
+//   } else {
+//     res.json('All is well');
+//   }
+// });
 apiRouter.use('/articles', articlesRouter);
 apiRouter.use('/topics', topicsRouter);
 apiRouter.use('/users', usersRouter);

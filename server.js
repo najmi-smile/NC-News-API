@@ -43,7 +43,8 @@ app.use(expressValidator({
 
 // delegate requests to router
 app.get('/', (req,res) => {
-  res.send('Please use /api/......')
+  
+  res.send('Please use /api/...... Need to show endpoints');
   // res.render('pages/contact')
 });
 app.use('/api', (req,res) => {
