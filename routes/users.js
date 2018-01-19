@@ -3,7 +3,7 @@ const usersRouter = require('express').Router();
 
 usersRouter.get('/', users.getUsers);
 usersRouter.get('/:user_name', users.userByName);
-usersRouter.get('/add', users.addUser);
+// usersRouter.get('/add', users.addUser);
 usersRouter.post('/add', users.addUser);
 usersRouter.put('/:user_id/', users.updateUser);
 usersRouter.delete('/:user_id', users.removeUser);
