@@ -15,7 +15,7 @@ articlesRouter.get('/:article_id/addcomment', comments.addComment);
 articlesRouter.post('/:article_id/addcomment', comments.addComment);
 articlesRouter.get('/:article_id/:comment_id', comments.getCommentById);
 articlesRouter.put('/:article_id/:comment_id', comments.updateComment);
-articlesRouter.put('/:article_id/:comment_id?', comments.voteComment);
+articlesRouter.put('/:article_id/:comment_id', comments.voteComment);
 articlesRouter.delete('/:article_id/:comment_id', comments.removeComment);
 
 articlesRouter.use('/*', (req, res) => {
