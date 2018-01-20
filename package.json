@@ -1,7 +1,7 @@
 {
   "name": "northcoders-news-api",
   "version": "1.0.0",
-  "description": "### Background",
+  "description": "### Backend API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,18 +12,9 @@
   "dependencies": {
     "async": "^2.1.4",
     "body-parser": "^1.15.2",
-    "chance": "^1.0.4",
-    "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
     "express": "^4.14.0",
-    "express-session": "^1.15.6",
-    "express-validator": "^4.3.0",
-    "log4js": "^1.0.1",
-    "moment": "^2.20.1",
     "mongoose": "^4.7.0",
-    "nodemailer": "^4.4.1",
-    "twilio": "^3.11.0",
-    "underscore": "^1.8.3",
     "url": "^0.11.0"
   }
 }

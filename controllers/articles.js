@@ -31,7 +31,6 @@ module.exports ={
   },
   getArticleById(req,res,next) {
     const _id = req.params.article_id;
-    req.session.article_id = _id;
     console.log(`*** Looking for article, ID : ${_id} `);
     Articles.findById(_id)
     .then(article => {
@@ -63,7 +62,6 @@ module.exports ={
     });
   },
   updateArticle(req,res,next) {
-
     const _id = req.params.article_id;
     const article = req.body;
     const update = {

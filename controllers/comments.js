@@ -2,8 +2,8 @@ const {Comments} = require('../models/models');
 module.exports ={
   getComments (req,res,next) {
     console.log(`*** Finding comments for ${req.params.article_id} in the database ...`);
-    console.log('*** article_id', req.session.article_id);
-    console.log('URL :', req.url);
+    // console.log('*** article_id', req.session.article_id);
+    // console.log('URL :', req.url);
 
     Comments.find({belongs_to : req.params.article_id})
     .then(comments => {

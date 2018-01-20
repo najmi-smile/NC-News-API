@@ -1,5 +1,4 @@
 const {Users,Register} = require('../models/models');
-const moment = require('moment');
 
 module.exports ={
   getUsers (req,res,next) {
@@ -14,7 +13,6 @@ module.exports ={
     console.log('*** Finding users in the database ...');
     return Users.find()
     .then(users => {
-      // return users;
       res.json(users);
     })
     .catch(next);
@@ -26,7 +24,6 @@ module.exports ={
     .then(user => {
       user = user.pop();
       res.json(user);
-      // res.render('pages/userDisplay',{user,moment});
     })
     .catch(next);
   },
