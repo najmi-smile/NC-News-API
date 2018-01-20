@@ -78,10 +78,10 @@ module.exports ={
           console.log(`votes return for ID ${_id} : ${article.votes}`)
           return article.votes;
         })
-        .then(res => {
-          console.log('Votes comming backe', res);
-          res += value;
-          Articles.findOneAndUpdate(_id,{votes : res},{},(err, article) => {
+        .then(votes => {
+          console.log('Votes comming backe', votes);
+          votes += value;
+          Articles.findOneAndUpdate(_id,{votes : votes},{},(err, article) => {
             if (err) next(err);
             res.json(article);
           });
