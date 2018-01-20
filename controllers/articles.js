@@ -3,30 +3,15 @@ const {Articles,Topics, Comments} = require('../models/models');
 module.exports ={
   getArticles (req,res,next) {
     console.log('*** Finding articles in the database ...');
-    console.log('*** Query', req.query);
-    // if(req.query){
-    //   Articles.find({belongs_to : req.query.topic })
-    //   .then(articles => {
-    //     // console.log('*** articles in model', articles);
-    //     const obj ={
-    //       articles_found : articles.length,
-    //       list_of_articles : articles
-    //     }
-    //     // res.json(obj);
-    //     res.render('pages/articles',{obj})
-    //   })
-    //   .catch(next);
-    // } else {
-      Articles.find()
-      .then(articles => {
-        const obj ={
-          articles_found : articles.length,
-          list_of_articles : articles
-        }
-        res.json(obj);
-        // res.render('pages/articles',{obj})
-      })
-      .catch(next);      
+    Articles.find()
+    .then(articles => {
+      const obj ={
+        articles_found : articles.length,
+        list_of_articles : articles
+      }
+      res.json(obj);
+    })
+    .catch(next);      
   },
   getArticlesForIndexPage (req,res,next) {
     let article;
@@ -45,9 +30,6 @@ module.exports ={
       .catch(next);
   },
   getArticleById(req,res,next) {
-    console.log('*** Params', req.params);
-    // session.article_id = req.params;
-    console.log(req.session);
     const _id = req.params.article_id;
     req.session.article_id = _id;
     console.log(`*** Looking for article, ID : ${_id} `);
@@ -80,7 +62,8 @@ module.exports ={
       res.json(response);
     });
   },
-  updateArticle(req,res,next){
+  updateArticle(req,res,next) {
+
     const _id = req.params.article_id;
     const article = req.body;
     const update = {
@@ -88,6 +71,7 @@ module.exports ={
       body : article.body
     }
     console.log(`*** Updating article ${article.title} ID ${_id} ...`)
+    console.log('Query',req);
     Articles.findOneAndUpdate(_id,update,{},(err, article) => {
       if (err) next(err);
       res.json(article);
