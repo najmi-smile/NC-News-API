@@ -64,7 +64,7 @@ module.exports ={
   updateArticle(req,res,next) {
     const _id = req.params.article_id;
     
-    console.log(`*** Received request from ID: ${_id} METHOD : ${req.method} ..`)
+    console.log(`*** Received request from url: ${req.url} METHOD : ${req.method} ..`)
 
     if(req.query){
       const query = req.query.vote.toLowerCase();
