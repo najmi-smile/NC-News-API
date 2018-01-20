@@ -82,7 +82,7 @@ module.exports ={
           console.log('Votes comming backe', votes);
           votes += value;
           console.log('id for update votes', _id);
-          Articles.findOneAndUpdate({_id:-id},{votes : votes},{},(err, article) => {
+          Articles.findOneAndUpdate({_id:_id},{votes : votes},{},(err, article) => {
             if (err) next(err);
             res.json(article);
           });
