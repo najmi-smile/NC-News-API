@@ -62,17 +62,43 @@ module.exports ={
     });
   },
   updateArticle(req,res,next) {
+
     const _id = req.params.article_id;
-    const article = req.body;
-    const update = {
-      title : article.title,
-      body : article.body
+
+    if(req.query){
+      const query = req.query.vote.toLowerCase();
+      if( query === 'up' || query === 'down') {
+        let value;
+        if (query === 'up') value = 1;
+        if (query === 'down') value = -1;
+
+        Articles.findById(_id)
+        .then(article => {
+          return article.votes;
+        })
+        .then(votes => {
+          Articles.findOneAndUpdate(_id,{votes : votes+value},{},(err, article) => {
+            if (err) next(err);
+            res.json(article);
+          });
+        })
+        .catch(next); 
+      } else {
+        res.json('Please enter a valid query string');
+      }
+    } else {
+      const article = req.body;
+      const update = {
+        title : article.title,
+        body : article.body
+      }
+      console.log(`*** Updating article ${article.title} ID ${_id} ...`)
+      // console.log('Query',req);
+      Articles.findOneAndUpdate(_id,update,{},(err, article) => {
+        if (err) next(err);
+        res.json(article);
+      });
     }
-    console.log(`*** Updating article ${article.title} ID ${_id} ...`)
-    console.log('Query',req);
-    Articles.findOneAndUpdate(_id,update,{},(err, article) => {
-      if (err) next(err);
-      res.json(article);
-    });
+    
   }
 };

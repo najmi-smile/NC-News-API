@@ -7,7 +7,6 @@ articlesRouter.get('/add', articles.addArticle);
 articlesRouter.post('/add', articles.addArticle);
 articlesRouter.get('/:article_id', articles.getArticleById);
 articlesRouter.put('/:article_id', articles.updateArticle);
-// articlesRouter.put('/:article_id?', articles.voteArticle);
 articlesRouter.delete('/:article_id', articles.removeArticle);
 
 //  commentsRouter
