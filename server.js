@@ -8,7 +8,7 @@ const app = express();
 mongoose.Promise = Promise;
 const apiRouter = require('./routes/apiRouter');
 const url = require('url');
-const session    = require('express-session');
+
 
 mongoose.connect(process.env.mLab, {useMongoClient: true})
   .then(() => console.log('successfully connected to remote database'))
@@ -23,7 +23,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(session({secret:'tahir'}));
+
 
 
 // delegate requests to router
