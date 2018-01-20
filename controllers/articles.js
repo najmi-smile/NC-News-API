@@ -73,18 +73,19 @@ module.exports ={
         if (query === 'up') value = 1;
         if (query === 'down') value = -1;
 
-        Articles.findById(_id)
+        votes = Articles.findById(_id)
         .then(article => {
           console.log(`votes return for ID ${_id} : ${article.votes}`)
           return article.votes;
         })
-        .then(votes => {
-          Articles.findOneAndUpdate(_id,{votes : votes+value},{},(err, article) => {
-            if (err) next(err);
-            res.json(article);
-          });
-        })
         .catch(next); 
+        votes += value;
+        Articles.findOneAndUpdate(_id,{votes : votes},{},(err, article) => {
+          if (err) next(err);
+          res.json(article);
+        });
+      
+       
       } else {
         res.json('Please enter a valid query string');
       }
