@@ -62,18 +62,20 @@ module.exports ={
     });
   },
   updateArticle(req,res,next) {
-
     const _id = req.params.article_id;
+    
+    console.log(`*** Received request from ID: ${_id} METHOD : ${req.method} ..`)
 
     if(req.query){
       const query = req.query.vote.toLowerCase();
       if( query === 'up' || query === 'down') {
-        let value;
+        let value = 0;
         if (query === 'up') value = 1;
         if (query === 'down') value = -1;
 
         Articles.findById(_id)
         .then(article => {
+          console.log(`votes return for ID ${_id} : ${article.votes}`)
           return article.votes;
         })
         .then(votes => {
