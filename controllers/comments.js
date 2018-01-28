@@ -41,7 +41,49 @@ module.exports ={
     });
   },
   voteComment (req,res,next) {
-    res.json(`${req.url} is comming soon .....`);
+    const _id = req.params.comment_id;
+    
+    console.log(`*** Received request from url: ${req.url} METHOD : ${req.method} ..`)
+
+    if(req.query){
+      const query = req.query.vote.toLowerCase();
+      if( query === 'up' || query === 'down') {
+        let value = 0;
+        if (query === 'up') value = 1;
+        if (query === 'down') value = -1;
+
+        Comments.findById(_id)
+        .then(comment => {
+          console.log(`votes return for ID ${_id} : ${comment.votes}`)
+          return comment.votes;
+        })
+        .then(votes => {
+          console.log('Votes comming backe', votes);
+          votes += value;
+          console.log('id for update votes', _id);
+          Comments.findOneAndUpdate({_id:_id},{votes : votes},{},(err, comment) => {
+            if (err) next(err);
+            res.json(comment);
+          });
+        })
+        .catch(next); 
+      } else {
+        res.json('Please enter a valid query string');
+      }
+    } else {
+      const article = req.body;
+      const update = {
+        title : article.title,
+        body : article.body
+      }
+      console.log(`*** Updating article ${article.title} ID ${_id} ...`)
+      // console.log('Query',req);
+      Articles.findOneAndUpdate({_id:_id},update,{},(err, article) => {
+        if (err) next(err);
+        res.json(article);
+      });
+    }
+    // res.json(`${req.url} is comming soon .....`);
   },
   removeComment(req,res,next) {
     console.log(`*** Warning! Deleting comment ... `);

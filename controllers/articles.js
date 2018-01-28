@@ -61,7 +61,7 @@ module.exports ={
       res.json(response);
     });
   },
-  updateArticle(req,res,next) {
+  voteArticle(req,res,next) {
     const _id = req.params.article_id;
     
     console.log(`*** Received request from url: ${req.url} METHOD : ${req.method} ..`)
@@ -99,7 +99,7 @@ module.exports ={
       }
       console.log(`*** Updating article ${article.title} ID ${_id} ...`)
       // console.log('Query',req);
-      Articles.findOneAndUpdate(_id,update,{},(err, article) => {
+      Articles.findOneAndUpdate({_id:_id},update,{},(err, article) => {
         if (err) next(err);
         res.json(article);
       });
