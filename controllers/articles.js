@@ -63,10 +63,11 @@ module.exports ={
   },
   voteArticle(req,res,next) {
     const _id = req.params.article_id;
+    console.log(req.query);
     
-    console.log(`*** Received request from url: ${req.url} METHOD : ${req.method} ..`)
+    console.log(`*** Received request from url: ${req.url} METHOD : ${req.method} .. query: ${req.query}`)
 
-    if(req.query){
+    if(req.query.vote){
       const query = req.query.vote.toLowerCase();
       if( query === 'up' || query === 'down') {
         let value = 0;
