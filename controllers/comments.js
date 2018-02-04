@@ -45,7 +45,7 @@ module.exports ={
     
     console.log(`*** Received request from url: ${req.url} METHOD : ${req.method} ..`)
 
-    if(req.query){
+    if(req.query.vote){
       const query = req.query.vote.toLowerCase();
       if( query === 'up' || query === 'down') {
         let value = 0;

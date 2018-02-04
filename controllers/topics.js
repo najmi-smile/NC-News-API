@@ -18,7 +18,7 @@ module.exports ={
     .catch(next);
   },
   getArticlesFromTopic(req,res,next) {
-    Articles.find({belongs_to : req.params.topic_id })
+    Articles.find({belongs_to : req.params.slug })
       .then(articles => {
         const obj ={
           articles_found : articles.length,
