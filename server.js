@@ -10,27 +10,24 @@ mongoose.Promise = Promise;
 const apiRouter = require('./routes/apiRouter');
 const url = require('url');
 
+app.use(cors());
 
 mongoose.connect(process.env.mLab, {useMongoClient: true})
   .then(() => console.log('successfully connected to remote database'))
   .catch(err => console.log('connection failed', err));
 
+  
+app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-app.use(cors());
 
 
 
 
 // delegate requests to router
 app.get('/', (req,res) => {
-  res.send('Please use /api/...... Need to show endpoints');
+  res.render('index.ejs');
 });
 app.use('/api', (req,res) => {
   console.log(`Received a request from ${req.url} method ${req.method}..`);

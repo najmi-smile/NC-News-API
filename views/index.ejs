@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <title>NC NEWS API</title>
+</head>
+<body>
+  <h1>Northcoders News API</h1>
+  <h1>End Points</h1>
+  
+  <h1>Topics Endpoint</h1>
+  <h3>GET /api/topics</h3>
+  <p>Returns all topics</p>
+  
+  <h3>GET /api/topics/add</h3>
+  <p>Adds topic</p>
+
+  <h1>Articles Endpoint</h1>
+  <h3>GET /api/articles</h3>
+  <p>Returns all articles</p>
+  
+  <h3>GET /api/topics/:slug/articles</h3>
+  <p>Returns all articles related to topic</p>
+  
+  <h3>PUT /api/articles/:article_id</h3>
+  <p>Updates the article</p>
+  
+  <h3>POST /api/articles/add</h3>
+  <p>ADDs new article</p>
+
+  <h3>PUT /api/articles/:article_id?vote=up</h3>
+  <p>Vote article up</p>
+  
+  <h3>PUT /api/articles/:article_id?vote=down</h3>
+  <p>Vote article down</p>
+  
+  <h3>DELETE /api/articles/:article_id</h3>
+  <p>Deletes article</p>
+
+  <h1>Comments Endpoints</h1>
+  <h3>GET /api/articles/:article_id/comments</h3>
+  <p>Returns all comments for article</p>
+  
+  <h3>GET /api/articles/:article_id/:comment_id</h3>
+  <p>Returns comment for article</p>
+
+  <h3>POST /api/articles/:article_id/addcomment</h3>
+  <p>Adds comment</p>
+  
+  <h3>DELETE /api/articles/:article_id/:comment_id</h3>
+  <p>Deletes comment</p>
+  
+  <h3>PUT /api/articles/:article_id/:comment_id?vote=up</h3>
+  <p>Vote comment up</p>
+  
+  <h3>PUT /api/articles/:article_id/:comment_id?vote=down</h3>
+  <p>Vote comment down</p>
+  
+  <h3>DELETE /api/articles/:article_id/:comment_id</h3>
+  <p>Deletes comment</p>
+  
+  <h1>User's Endpoint</h1>
+  <h3>Get /api/users</h3>
+  <p>Returns all the userst</p>
+  
+  <h3>Get /api/users/:user_name</h3>
+  <p>Returns the userst</p>
+  
+  <h3>POST /api/users/add</h3>
+  <p>Add User</p>
+  
+  <h3>PUT /api/users/:user_id</h3>
+  <p>Updates User</p>
+  
+  <h3>DELETE /api/users/:user_id</h3>
+  <p>Deletes User</p>
+</body>
+</html>
