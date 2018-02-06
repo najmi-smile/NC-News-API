@@ -52,23 +52,12 @@ module.exports ={
         if (query === 'up') value = 1;
         if (query === 'down') value = -1;
 
-        Comments.findById(_id)
-        .then(comment => {
-          console.log(`votes return for ID ${_id} : ${comment.votes}`)
-          return comment.votes;
-        })
-        .then(votes => {
-          console.log('Votes comming backe', votes);
-          votes += value;
-          console.log('id for update votes', _id);
-          Comments.findOneAndUpdate({_id:_id},{votes : votes},{},(err, comment) => {
-            if (err) next(err);
-            res.json(comment);
-          });
-        })
-        .catch(next); 
+        Comments.findOneAndUpdate({_id:_id},{ $inc : {votes : value} },{},(err, comment) => {
+          if (err) next(err);
+          res.json(comment);
+        }); 
       } else {
-        res.json('Please enter a valid query string');
+        res.set(500).json('Please enter a valid query string');
       }
     } else {
       const article = req.body;
