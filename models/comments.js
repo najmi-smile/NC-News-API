@@ -22,7 +22,8 @@ var CommentSchema = new Schema({
     type: String,
     required: true,
     default: 'TA Raza'
-  }
+  },
+  liked_by: []
 });
 
 module.exports = mongoose.model('comments', CommentSchema);
