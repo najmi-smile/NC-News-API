@@ -12,17 +12,21 @@ const url = require('url');
 
 app.use(cors());
 
-mongoose.connect(process.env.mLab, {useMongoClient: true})
+let DB;
+if(process.env.NODE_ENV === 'dev'){
+  DB = 'mongodb://localhost/northcoders-news-api';
+} else if (process.env.NODE_ENV === 'test') {
+  DB = 'mongodb://localhost/northcoders-news-api-test';
+}
+else DB = process.env.mLab;
+
+mongoose.connect(DB, {useMongoClient: true})
   .then(() => console.log('successfully connected to remote database'))
   .catch(err => console.log('connection failed', err));
 
-  
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-
-
-
 
 
 // delegate requests to router

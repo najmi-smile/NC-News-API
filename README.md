@@ -8,23 +8,27 @@ This API has been deployed to Heroku [here](https://quiet-shore-88770.herokuapp.
 ## Set Up
 To check if Node.js is installed on your machine open a terminal window and enter:
 
-```node -v```
+```$ node -v```
 
 If you do not already have Node.js installed please follow the instructions on [this guide](https://nodejs.org/en/download/package-manager/).
 
 To check if npm is installed on your machine enter this command in you terminal window: 
 
-```npm -v```
+```$ npm -v```
 
 If you do not have npm already installed please follow [this guide](https://www.npmjs.com/get-npm) to set it up.
 
 To check if git is installed on your machine please enter the following commitng in your terminal window: 
 
-```git --version```
+```$ git --version```
 
 If you do not already have git installed on your machine please follow [this guide](https://git-scm.com/).
 
+To check if MongoDB is installed 
+```$  mongod --version```
+
 If you do not have MongoDB already installed, please follow [this guide](https://docs.mongodb.com/manual/installation/)
+
 
 # Installation
 
@@ -32,23 +36,25 @@ To run this project you will need to clone it onto your local machine and instal
 
 To do so use the command line to o navigate to your preferred directory on your local machine and enter the following command on the terminal window:
 
-```git clone https://github.com/najmi-smile/BE-FT-northcoders-news.git```
+```$ git clone https://github.com/najmi-smile/BE-FT-northcoders-news.git```
 
 Navigate inside the folder and install all dependencies by entering the following command on your terminal window: 
 
-```npm install```
+```$ npm install```
 
- Enter the following command in your terminal window to connect to the database and keep it running: 
+ Enter the following command in your terminal window to run MongoDB:
 
-```mongod```
+```$ mongod```
+
+
 
 Open another terminal window, navigate inside the project folder and enter the following command to populate the database: 
 
-```node seed/seed.js```
+```$ node seed/seed.js```
 
 Finally to run the server enter the following command in your terminal window: 
 
-```npm start```
+```$ npm start```
 
 This will run the server on port 3000. All endpoints can be found locally on http://localhost:3000 .
 
@@ -56,7 +62,7 @@ This will run the server on port 3000. All endpoints can be found locally on htt
 
 To test the API navigate to the project directory and enter the following command
 
-```npm test```
+```$ npm test```
 
 Testing was carried out using Mocha, Chai and Supertest
 

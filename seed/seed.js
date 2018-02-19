@@ -1,3 +1,4 @@
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev';
 var models = require('../models/models');
 var userData = require('./data/user_data.js');
 var articleData = require('./data/articles');
@@ -10,10 +11,17 @@ var log4js = require('log4js');
 var logger = log4js.getLogger();
 var moment = require('moment');
 
+let DB;
+if(process.env.NODE_ENV === 'dev'){
+  DB = 'mongodb://localhost/northcoders-news-api';
+} else if (process.env.NODE_ENV === 'test') {
+  DB = 'mongodb://localhost/northcoders-news-api-test';
+}
+else DB = process.env.mLab;
 
-mongoose.connect(process.env.mLab, function (err) {
+mongoose.connect(DB, function (err) {
   if (!err) {
-    logger.info(`connected to database ${process.env.mLab}`);
+    logger.info(`connected to database ${process.env.NODE_ENV}`);
     mongoose.connection.db.dropDatabase();
     async.waterfall([
       addUsers,
