@@ -13,7 +13,7 @@ apiRouter.use('/topics', topicsRouter);
 apiRouter.use('/users', usersRouter);
 
 apiRouter.use('/*', (req, res) => {
-  res.status(404).send('Page not found in api routes');
+  res.status(404).send('resources not found');
 });
 
 apiRouter.use((err, req, res, next) => {

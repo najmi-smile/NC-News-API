@@ -3,7 +3,7 @@ module.exports ={
   getTopics (req,res,next) {
     return Topics.find()
       .then(topics => {
-        res.json(topics);
+        res.json({topics});
       })
       .catch(next);
   },

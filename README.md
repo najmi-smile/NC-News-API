@@ -5,20 +5,20 @@ A RESTful API for Northcoders News, a news aggregation site. Built using Node.js
 
 This API has been deployed to Heroku [here](https://quiet-shore-88770.herokuapp.com/).
 
-## Set Up
-To check if Node.js is installed on your machine open a terminal window and enter:
+## Local Set Up
+Check if Node.js is installed on your machine open a terminal window and enter:
 
 ```$ node -v```
 
 If you do not already have Node.js installed please follow the instructions on [this guide](https://nodejs.org/en/download/package-manager/).
 
-To check if npm is installed on your machine enter this command in you terminal window: 
+Check if npm is installed on your machine enter this command in you terminal window: 
 
 ```$ npm -v```
 
 If you do not have npm already installed please follow [this guide](https://www.npmjs.com/get-npm) to set it up.
 
-To check if git is installed on your machine please enter the following commitng in your terminal window: 
+Check if git is installed on your machine please enter the following commitng in your terminal window: 
 
 ```$ git --version```
 
@@ -34,7 +34,7 @@ If you do not have MongoDB already installed, please follow [this guide](https:/
 
 To run this project you will need to clone it onto your local machine and install all dependencies.
 
-To do so use the command line to o navigate to your preferred directory on your local machine and enter the following command on the terminal window:
+To do so use the command line to navigate to your preferred directory on your local machine and enter the following command on the terminal window:
 
 ```$ git clone https://github.com/najmi-smile/BE-FT-northcoders-news.git```
 
@@ -42,7 +42,7 @@ Navigate inside the folder and install all dependencies by entering the followin
 
 ```$ npm install```
 
- Enter the following command in your terminal window to run MongoDB:
+ Enter the following command in your terminal window to run Mongo server:
 
 ```$ mongod```
 
@@ -51,12 +51,14 @@ Navigate inside the folder and install all dependencies by entering the followin
 Open another terminal window, navigate inside the project folder and enter the following command to populate the database: 
 
 ```$ node seed/seed.js```
+or
+``` $ npm run seed ```
 
-Finally to run the server enter the following command in your terminal window: 
+Finally to run the application enter the following command in your terminal window: 
 
 ```$ npm start```
 
-This will run the server on port 3000. All endpoints can be found locally on http://localhost:3000 .
+This will run a local server on port 3000. All endpoints can be found locally on http://localhost:3000 .
 
 # Testing
 

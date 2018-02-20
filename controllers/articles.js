@@ -12,21 +12,6 @@ module.exports ={
       })
       .catch(next);      
   },
-  getArticlesForIndexPage (req,res,next) {
-    let article;
-    return Articles.find().limit(1).sort({$natural:-1})
-      .then(data => {
-        article =  data.pop();
-        return article;
-      })
-      .then(article => {
-        return Comments.find({belongs_to : article._id})
-          .then(comments => {
-            return {article,comments};
-          });
-      })
-      .catch(next);
-  },
   getArticleById(req,res,next) {
     const _id = req.params.article_id;
     Articles.findById(_id)
@@ -69,9 +54,9 @@ module.exports ={
           res.json(article);
         }); 
       } else {
-        res.set(500).json('Please enter a valid query string');
+        res.set(500).json({'error':'Please enter a valid vote'});
       }
-    } else {
+    } else if(!req.query) {
       const article = req.body;
       const update = {
         title : article.title,
@@ -81,7 +66,10 @@ module.exports ={
         if (err) next(err);
         res.json(article);
       });
+    } else {
+      res.set(500).json({'error':'Please enter a valid url/query'});
     }
+  
     
   }
 };

@@ -4,14 +4,7 @@ module.exports ={
   getUsers (req,res,next) {
     Users.find()
       .then(users => {
-        res.json(users);
-      })
-      .catch(next);
-  },
-  getUsersForIndexPage (req,res,next) {
-    return Users.find()
-      .then(users => {
-        res.json(users);
+        res.json({users});
       })
       .catch(next);
   },

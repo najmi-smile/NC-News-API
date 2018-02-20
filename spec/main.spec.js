@@ -10,17 +10,16 @@ describe ('api', () => {
         .expect(200)
         .then(res => {
           expect(res.body.list_of_articles).to.be.an('Array');
-        })
-    })
-    // it('Get Request to api/articles/getbyid', () => {
-    //   return request
-    //     .get('/api/articles/5a48e2bfae21fcf62286f091')
-    //     .expect(200)
-    //     .then(res => {
-    //       expect(res.body).to.be.an('object');
-    //       expect(res.body.belongs_to).to.equal('football');
-    //     })
-    // })
+        });
+    });
+    it('return error when Request to undefined route', () => {
+      return request
+        .get('/api/article')
+        .expect(404)
+        .then(res => {
+          expect(res.body).to.be.an('object');
+        });
+    });
     it('Post a new article', () => {
       return request
         .post('/api/articles/add')
@@ -30,14 +29,14 @@ describe ('api', () => {
           "created_by": "raza1",
           "belongs_to": "football",
           "votes": 11
-      })
+        })
         .set('Accept','application/json')
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body.created_by).to.equal('raza1');
-        })
-    })
+        });
+    });
     it('Delete new article', () => {
       return request.get('/api/articles').then(res => {
         if(res.body.list_of_articles.length > 0) {
@@ -47,10 +46,10 @@ describe ('api', () => {
             .then(res => {
               expect(res.body).to.be.an('object');
               expect(res.body.ok).to.equal(1);
-            })
+            });
         }
-      })
-    })
+      });
+    });
     it('Update article', () => {
       return request.get('/api/articles').then(res => {
         if(res.body.list_of_articles.length > 0) {
@@ -64,10 +63,10 @@ describe ('api', () => {
             .then(res => {
               expect(res.body).to.be.an('object');
               expect(res.body.title).to.equal('tdd - update');
-            })
+            });
         }
-      })
-    })
+      });
+    });
     it('vote article up', () => {
       return request.get('/api/articles').then(res => {
         if(res.body.list_of_articles.length > 0) {
@@ -81,11 +80,11 @@ describe ('api', () => {
                 .then(res =>{
                   expect(res.body).to.be.an('object');
                   expect(res.body.votes).to.equal(votes+1);                  
-                })
-            })
+                });
+            });
         }
-      })
-    })
+      });
+    });
     it('vote article down', () => {
       return request.get('/api/articles').then(res => {
         if(res.body.list_of_articles.length > 0) {
@@ -99,13 +98,41 @@ describe ('api', () => {
                 .then(res =>{
                   expect(res.body).to.be.an('object');
                   expect(res.body.votes).to.equal(votes-1);                  
-                })
-            })
+                });
+            });
         }
-      })
-    })
+      });
+    });
+    it('return an error if given wrong url', () => {
+      return request.get('/api/articles').then(res => {
+        if(res.body.list_of_articles.length > 0) {
+          const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
+          return request.put(`/api/articles/${id}?bot=down`)
+            .expect(500)
+            .then(res =>{
+              expect(res.body).to.be.an('object');
+              expect(res.body.error).to.equal('Please enter a valid url/query');                  
+            });
+            
+        }
+      });
+    });
+    it('return an error if given wrong query', () => {
+      return request.get('/api/articles').then(res => {
+        if(res.body.list_of_articles.length > 0) {
+          const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
+          return request.put(`/api/articles/${id}?vote=own`)
+            .expect(500)
+            .then(res =>{
+              expect(res.body).to.be.an('object');
+              expect(res.body.error).to.equal('Please enter a valid vote');                  
+            });
+            
+        }
+      });
+    });
   });  //  Articles
-  describe('topics', ( )=> {
+  describe.only('topics', ( )=> {
     it('Responds with an array of topics and 200 status', () => {
       return request
         .get('/api/topics')
