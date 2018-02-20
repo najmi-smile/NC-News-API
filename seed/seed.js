@@ -21,7 +21,7 @@ if(process.env.NODE_ENV === 'dev'){
 else DB = process.env.mLab;
 
 mongoose.connect(DB,{useMongoClient: true})
- .then(() => {
+  .then(() => {
     logger.info(`connected to database ${process.env.NODE_ENV}`);
     mongoose.connection.db.dropDatabase();
     async.waterfall([
@@ -59,7 +59,7 @@ function addNorthcoderUser(done) {
 }
 
 function addUsers(done) {
-  logger.info('adding users')
+  logger.info('adding users');
   async.eachSeries(userData, function (user, cb) {
     const userDoc = new models.Users(user);
     userDoc.save(function (err) {
@@ -70,12 +70,12 @@ function addUsers(done) {
     });
   }, function (error) {
     if (error) return done(error);
-    return done(null)
-  })
+    return done(null);
+  });
 }
 
 function addTopics(done) {
-  logger.info('adding topics')
+  logger.info('adding topics');
   const topicDocs = [];
   async.eachSeries(['Football', 'Cooking', 'Coding'], function (topic, cb) {
     const topicObj = {
@@ -94,8 +94,8 @@ function addTopics(done) {
     });
   }, function (error) {
     if (error) return done(error);
-    return done(null, topicDocs)
-  })
+    return done(null, topicDocs);
+  });
 }
 
 function addArticles(topicDocs, done) {
@@ -139,8 +139,8 @@ function addArticles(topicDocs, done) {
 
   }, function (error) {
     if (error) return done(error);
-    return done(null, docIds)
-  })
+    return done(null, docIds);
+  });
 }
 
 function addComments(docIds, done) {
@@ -157,26 +157,26 @@ function addComments(docIds, done) {
       const commentDoc = new models.Comments(comment);
       commentDoc.save(function (err) {
         if (err) {
-          return cb(err)
+          return cb(err);
         }
         return cbTwo();
-      })
+      });
     }, function (error) {
       if (error) return done(error);
       return cb();
-    })
+    });
 
   }, function (err) {
     if (err) return done(err);
-    return done()
+    return done();
   });
 }
 
 function getRandomStamp() {
   return new Date (
     moment().subtract(_.sample(_.range(1,7)), 'days')
-    .subtract(_.sample(_.range(1,24)), 'hours')
-    .subtract(_.sample(_.range(1,60)), 'minutes')
-    .format()
-  ).getTime()
+      .subtract(_.sample(_.range(1,24)), 'hours')
+      .subtract(_.sample(_.range(1,60)), 'minutes')
+      .format()
+  ).getTime();
 }

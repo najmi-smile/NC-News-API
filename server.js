@@ -8,7 +8,6 @@ const app = express();
 
 mongoose.Promise = Promise;
 const apiRouter = require('./routes/apiRouter');
-const url = require('url');
 
 app.use(cors());
 

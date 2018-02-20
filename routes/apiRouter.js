@@ -1,5 +1,4 @@
 const apiRouter = require('express').Router();
-const {articles,comments,topics,users} = require('../controllers');
 const {articlesRouter,topicsRouter,usersRouter} = require('./index');
 
 apiRouter.get('/', (req,res,next) => {

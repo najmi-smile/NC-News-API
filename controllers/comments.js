@@ -1,23 +1,23 @@
-const {Comments} = require('../models/models');
+const {Comments,Articles} = require('../models/models');
 module.exports ={
   getComments (req,res,next) {
     Comments.find({belongs_to : req.params.article_id})
-    .then(comments => {
-      const obj ={
-        comments_found : comments.length,
-        list_of_comments : comments
-      }
-      res.json(obj);
-    })
-    .catch(next);
+      .then(comments => {
+        const obj ={
+          comments_found : comments.length,
+          list_of_comments : comments
+        };
+        res.json(obj);
+      })
+      .catch(next);
   },
   getCommentById (req,res,next) {
     const _id = req.params.comment_id;
     Comments.findById(_id)
-    .then(comment => {
-      res.json(comment);
-    })
-    .catch(next);  
+      .then(comment => {
+        res.json(comment);
+      })
+      .catch(next);  
   },
   addComment (req,res,next) {
     const belongs_to = req.params.article_id || req.body.belongs_to;
@@ -26,7 +26,7 @@ module.exports ={
       belongs_to : belongs_to,
       votes : req.body.votes,
       created_by : req.body.created_by
-    }
+    };
     Comments.create(omment, (err,omment) => {
       if(err) next(err);
       res.json(omment);
@@ -53,7 +53,7 @@ module.exports ={
       const update = {
         title : article.title,
         body : article.body
-      }
+      };
       Articles.findOneAndUpdate({_id:_id},update,{},(err, article) => {
         if (err) next(err);
         res.json(article);
@@ -64,7 +64,7 @@ module.exports ={
     Comments.deleteOne({_id:req.params.comment_id}, (err, response) => {
       if(err) next(err);
       res.json(response);
-    })
+    });
   },
   updateComment(req,res,next) {
     const _id = req.params.comment_id;
@@ -72,7 +72,7 @@ module.exports ={
     const comment = req.body;
     const update = {
       body : comment.body
-    }
+    };
     Comments.findOneAndUpdate(_id,update,{},(err, comment) => {
       if (err) next(err);
       res.json(comment);
