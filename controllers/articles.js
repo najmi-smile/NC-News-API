@@ -2,7 +2,6 @@ const {Articles,Topics, Comments} = require('../models/models');
 
 module.exports ={
   getArticles (req,res,next) {
-    console.log('*** Finding articles in the database ...');
     Articles.find()
     .then(articles => {
       const obj ={
@@ -15,7 +14,6 @@ module.exports ={
   },
   getArticlesForIndexPage (req,res,next) {
     let article;
-    console.log('*** Fetching latest article ...');
       return Articles.find().limit(1).sort({$natural:-1})
       .then(data => {
         article =  data.pop();
@@ -31,7 +29,6 @@ module.exports ={
   },
   getArticleById(req,res,next) {
     const _id = req.params.article_id;
-    console.log(`*** Looking for article, ID : ${_id} `);
     Articles.findById(_id)
     .then(article => {
       res.json(article);
@@ -39,7 +36,6 @@ module.exports ={
     .catch(next); 
   },
   addArticle(req,res,next) {
-    console.log(`*** Wait! Adding article, Title : ${req.body.title} ... `);
     const belongs_to = req.params.article_id || req.body.belongs_to;
     const article = {
       title : req.body.title,
@@ -55,7 +51,6 @@ module.exports ={
     })
   },
   removeArticle(req,res,next) {
-    console.log(`*** Warning! Deleting article ... `);
     Articles.deleteOne({_id:req.params.article_id}, (err, response) => {
       if(err) next(err);
       res.json(response);
@@ -63,10 +58,6 @@ module.exports ={
   },
   voteArticle(req,res,next) {
     const _id = req.params.article_id;
-    console.log(req.query);
-    
-    console.log(`*** Received request from url: ${req.url} METHOD : ${req.method} .. query: ${req.query}`)
-
     if(req.query.vote){
       const query = req.query.vote.toLowerCase();
       if( query === 'up' || query === 'down') {
@@ -86,8 +77,6 @@ module.exports ={
         title : article.title,
         body : article.body
       }
-      console.log(`*** Updating article ${article.title} ID ${_id} ...`)
-      // console.log('Query',req);
       Articles.findOneAndUpdate({_id:_id},update,{},(err, article) => {
         if (err) next(err);
         res.json(article);

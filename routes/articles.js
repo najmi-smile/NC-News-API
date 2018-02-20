@@ -1,6 +1,5 @@
 const {articles,comments} = require('../controllers');
 const articlesRouter = require('express').Router(['strict']);
-// TODO move articles with topic to establish the connection
 
 articlesRouter.get('/', articles.getArticles);
 articlesRouter.post('/add', articles.addArticle);

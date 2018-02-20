@@ -6,8 +6,7 @@
   "scripts": {
     "test": "mocha spec",
     "start": "node index.js",
-    "seed-db": "psql -f seed/seed.js",
-    "seed-test-db": "psql -f seed/test.seed.js && mocha spec"
+    "dev-db": "node seed/seed.js"
   },
   "author": "",
   "license": "ISC",

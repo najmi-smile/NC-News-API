@@ -34,7 +34,6 @@ app.get('/', (req,res) => {
   res.render('index.ejs');
 });
 app.use('/api', (req,res) => {
-  console.log(`Received a request from ${req.url} method ${req.method}..`);
   apiRouter(req,res);
 });
 app.use('/*', (req, res,next) => {

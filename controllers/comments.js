@@ -1,10 +1,6 @@
 const {Comments} = require('../models/models');
 module.exports ={
   getComments (req,res,next) {
-    console.log(`*** Finding comments for ${req.params.article_id} in the database ...`);
-    // console.log('*** article_id', req.session.article_id);
-    // console.log('URL :', req.url);
-
     Comments.find({belongs_to : req.params.article_id})
     .then(comments => {
       const obj ={
@@ -16,10 +12,7 @@ module.exports ={
     .catch(next);
   },
   getCommentById (req,res,next) {
-    console.log('params :', req.params);
-
     const _id = req.params.comment_id;
-    console.log(`*** Received a find by ID request, ID : ${_id} `);
     Comments.findById(_id)
     .then(comment => {
       res.json(comment);
@@ -27,7 +20,6 @@ module.exports ={
     .catch(next);  
   },
   addComment (req,res,next) {
-    console.log(`*** Wait! Adding comment ... `);
     const belongs_to = req.params.article_id || req.body.belongs_to;
     const omment = {
       body : req.body.body,
@@ -42,9 +34,6 @@ module.exports ={
   },
   voteComment (req,res,next) {
     const _id = req.params.comment_id;
-    
-    console.log(`*** Received request from url: ${req.url} METHOD : ${req.method} ..`)
-
     if(req.query.vote){
       const query = req.query.vote.toLowerCase();
       if( query === 'up' || query === 'down') {
@@ -65,17 +54,13 @@ module.exports ={
         title : article.title,
         body : article.body
       }
-      console.log(`*** Updating article ${article.title} ID ${_id} ...`)
-      // console.log('Query',req);
       Articles.findOneAndUpdate({_id:_id},update,{},(err, article) => {
         if (err) next(err);
         res.json(article);
       });
     }
-    // res.json(`${req.url} is comming soon .....`);
   },
   removeComment(req,res,next) {
-    console.log(`*** Warning! Deleting comment ... `);
     Comments.deleteOne({_id:req.params.comment_id}, (err, response) => {
       if(err) next(err);
       res.json(response);
@@ -88,7 +73,6 @@ module.exports ={
     const update = {
       body : comment.body
     }
-    console.log(`*** Received a request from ID ${_id} ...`)
     Comments.findOneAndUpdate(_id,update,{},(err, comment) => {
       if (err) next(err);
       res.json(comment);
