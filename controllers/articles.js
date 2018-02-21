@@ -1,4 +1,4 @@
-const {Articles, Comments} = require('../models/models');
+const {Articles} = require('../models/models');
 
 module.exports ={
   getArticles (req,res,next) {

@@ -132,24 +132,23 @@ describe ('api', () => {
       });
     });
   });  //  Articles
-  describe.only('topics', ( )=> {
-    it('Responds with an array of topics and 200 status', () => {
+  describe('topics', ( )=> {
+    it('Responds with an object of topics and 200 status', () => {
       return request
         .get('/api/topics')
         .expect(200)
         .then(res => {
-          expect(res.body).to.be.an('Array');
-        })
-    })
-    // it('Get Request to api/topics/getbyid', () => {
-    //   return request
-    //     .get('/api/topics/5a48e2bfae21fcf62286f08b')
-    //     .expect(200)
-    //     .then(res => {
-    //       expect(res.body).to.be.an('object');
-    //       expect(res.body.slug).to.equal('cooking');
-    //     })
-    // })
+          expect(res.body).to.be.an('object');
+        });
+    });
+    it('respond with error if route does not exist', () => {
+      return request
+        .get('/api/topic')
+        .expect(404)
+        .then(res => {
+          expect(res.body).to.be.an('object');
+        });
+    });
     it('Get Request to api/topics/:slug/articles', () => {
       return request
         .get('/api/topics/cooking/articles')
@@ -157,22 +156,8 @@ describe ('api', () => {
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body.list_of_articles).to.be.an('array');
-        })
-    })
-    it('Post a new topic', () => {
-      return request
-        .post('/api/topics/add')
-        .send({
-          "title": "Tech",
-          "slug":"tech"
-        })
-        .set('Accept','application/json')
-        .expect(200)
-        .then(res => {
-          expect(res.body).to.be.an('object');
-          expect(res.body.slug).to.equal('tech');
-        })
-    })
+        });
+    });
   }); //  Topics
   describe('users', () => {
     it('Responds with an array of users and 200 status', () => {
@@ -180,18 +165,18 @@ describe ('api', () => {
         .get('/api/users')
         .expect(200)
         .then(res => {
-          expect(res.body).to.be.an('Array');
-        })
-    })
-    // it('Get Request to api/users/username', () => {
-    //   return request
-    //     .get('/api/users/grumpy19')
-    //     .expect(200)
-    //     .then(res => {
-    //       expect(res.body).to.be.an('object');
-    //       expect(res.body.username).to.equal('grumpy19');
-    //     })
-    // })
+          expect(res.body).to.be.an('object');
+        });
+    });
+    it('Through a error if resource not found', () => {
+      return request
+        .get('/api/users/northcoders')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.eql({ error: 'Resource not found' });
+        });
+    });
   }); //  Users
   describe('comments', ()=>{  
     it('Get Request to api/articles/getbyid/comments', () => {
@@ -201,55 +186,63 @@ describe ('api', () => {
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body.list_of_comments).to.be.an('array');
-        })
-    }) 
+        });
+    }); 
+    it('throw an error if rout does not exists', () => {
+      return request
+        .get('/api/articles/5a48e2bfae21fcf62286f091/comment')
+        .expect(500)
+        .then(res => {
+          expect(res.body).to.be.an('object');
+        });
+    }); 
     it('vote comment up', () => {
       return request.get('/api/articles').then(res => {
         if(res.body.list_of_articles.length > 0) {
           const article_id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
           return request.get(`/api/articles/${article_id}/comments`)
-          .then(res => {
-            if(res.body.list_of_comments.length > 0) {
-              const comment_id =  res.body.list_of_comments[res.body.list_of_comments.length - 1]._id;
-              const votes = res.body.list_of_comments[res.body.list_of_comments.length - 1].votes;
-              return request.put(`/api/articles/${article_id}/${comment_id}?vote=up`)
-                .expect(200)
-                .then(() => {
-                  return request.get(`/api/articles/${article_id}/${comment_id}`)
-                    .expect(200)
-                    .then(res =>{
-                      expect(res.body).to.be.an('object');
-                      expect(res.body.votes).to.equal(votes+1);                  
-                    })
-                })
-            }
-          })
+            .then(res => {
+              if(res.body.list_of_comments.length > 0) {
+                const comment_id =  res.body.list_of_comments[res.body.list_of_comments.length - 1]._id;
+                const votes = res.body.list_of_comments[res.body.list_of_comments.length - 1].votes;
+                return request.put(`/api/articles/${article_id}/${comment_id}?vote=up`)
+                  .expect(200)
+                  .then(() => {
+                    return request.get(`/api/articles/${article_id}/${comment_id}`)
+                      .expect(200)
+                      .then(res =>{
+                        expect(res.body).to.be.an('object');
+                        expect(res.body.votes).to.equal(votes+1);                  
+                      });
+                  });
+              }
+            });
         }
-      })
-    })
+      });
+    });
     it('vote comment down', () => {
       return request.get('/api/articles').then(res => {
         if(res.body.list_of_articles.length > 0) {
           const article_id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
           return request.get(`/api/articles/${article_id}/comments`)
-          .then(res => {
-            if(res.body.list_of_comments.length > 0) {
-              const comment_id =  res.body.list_of_comments[res.body.list_of_comments.length - 1]._id;
-              const votes = res.body.list_of_comments[res.body.list_of_comments.length - 1].votes;
-              return request.put(`/api/articles/${article_id}/${comment_id}?vote=down`)
-                .expect(200)
-                .then(() => {
-                  return request.get(`/api/articles/${article_id}/${comment_id}`)
-                    .expect(200)
-                    .then(res =>{
-                      expect(res.body).to.be.an('object');
-                      expect(res.body.votes).to.equal(votes-1);                  
-                    })
-                })
-            }
-          })
+            .then(res => {
+              if(res.body.list_of_comments.length > 0) {
+                const comment_id =  res.body.list_of_comments[res.body.list_of_comments.length - 1]._id;
+                const votes = res.body.list_of_comments[res.body.list_of_comments.length - 1].votes;
+                return request.put(`/api/articles/${article_id}/${comment_id}?vote=down`)
+                  .expect(200)
+                  .then(() => {
+                    return request.get(`/api/articles/${article_id}/${comment_id}`)
+                      .expect(200)
+                      .then(res =>{
+                        expect(res.body).to.be.an('object');
+                        expect(res.body.votes).to.equal(votes-1);                  
+                      });
+                  });
+              }
+            });
         }
-      })
-    })
-  })  //  comments
+      });
+    });
+  });  //  comments
 });  //  api

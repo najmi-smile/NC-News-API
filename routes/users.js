@@ -2,11 +2,7 @@ const {users} = require('../controllers');
 const usersRouter = require('express').Router();
 
 usersRouter.get('/', users.getUsers);
-usersRouter.post('/add', users.addUser);
-usersRouter.put('/:user_id/', users.updateUser);
 usersRouter.get('/:user_name', users.userByName);
-usersRouter.delete('/:user_id', users.removeUser);
-
 
 usersRouter.use('/*', (req, res) => {
   res.status(404).send('Page not found in users routes');
