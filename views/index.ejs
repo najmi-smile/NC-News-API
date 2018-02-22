@@ -8,81 +8,63 @@
 
 <body>
   <div class="container">
-      <h1>Northcoders News API</h1>
+    <h1>Northcoders News API</h1>
     <div class="row">
+
       <div class="col-lg-6">
         <div class="well">
-            <h3>Topics Endpoint</h3>
-            <h5>GET /api/topics</h5>
-            <small>Returns all topics</small>
-            
-            <h5>POST /api/topics/add</h5>
-            <small>Adds topic</small>
+          <h3>Topics Endpoint</h3>
+          <h5>GET /api/topics</h5>
+          <small>Returns all topics</small>
+        
+          <h3>Articles Endpoint</h3>
+          <h5>GET /api/articles</h5>
+          <small>Returns all articles</small>
           
-            <h3>Articles Endpoint</h3>
-            <h5>GET /api/articles</h5>
-            <small>Returns all articles</small>
-            
-            <h5>GET /api/topics/:slug/articles</h5>
-            <small>Returns all articles related to topic</small>
-            
-            <h5>PUT /api/articles/:article_id</h5>
-            <small>Updates the article</small>
-            
-            <h5>POST /api/articles/add</h5>
-            <small>ADDs new article</small>
+          <h5>GET /api/topics/:slug/articles</h5>
+          <small>Returns all articles related to topic</small>
           
-            <h5>PUT /api/articles/:article_id?vote=up</h5>
-            <small>Vote article up</small>
-            
-            <h5>PUT /api/articles/:article_id?vote=down</h5>
-            <small>Vote article down</small>
-            
-            <h5>DELETE /api/articles/:article_id</h5>
-            <small>Deletes article</small>
+          <h5>PUT /api/articles/:article_id</h5>
+          <small>Updates the article</small>
+        
+          <h5>PUT /api/articles/:article_id?vote=up</h5>
+          <small>Vote article up</small>
+          
+          <h5>PUT /api/articles/:article_id?vote=down</h5>
+          <small>Vote article down</small>
+        </div>  <!--  class="well" -->
+      </div>  <!--  "col-lg-6" -->
+
+      <div class="col-lg-6">
+        <div class="well">
+          <h3>Comments Endpoints</h3>
+          <h5>GET /api/articles/:article_id/comments</h5>
+          <small>Returns all comments for article</small>
+          
+          <h5>GET /api/articles/:article_id/:comment_id</h5>
+          <small>Returns comment for article</small>
+        
+          <h5>POST /api/articles/:article_id/addcomment</h5>
+          <small>Adds comment</small>
+          
+          <h5>DELETE /api/articles/:article_id/:comment_id</h5>
+          <small>Deletes comment</small>
+          
+          <h5>PUT /api/articles/:article_id/:comment_id?vote=up</h5>
+          <small>Vote comment up</small>
+          
+          <h5>PUT /api/articles/:article_id/:comment_id?vote=down</h5>
+          <small>Vote comment down</small>
+          
+          <h3>User's Endpoint</h3>
+          <h5>Get /api/users</h5>
+          <small>Returns all the userst</small>
+          
+          <h5>Get /api/users/:user_name</h5>
+          <small>Returns the userst</small>
         </div>  <!--  class="jumbotron" -->
       </div>  <!--  "col-lg-6" -->
-      <div class="col-lg-6">
-          <div class="well">
-              <h3>Comments Endpoints</h3>
-              <h5>GET /api/articles/:article_id/comments</h5>
-              <small>Returns all comments for article</small>
-              
-              <h5>GET /api/articles/:article_id/:comment_id</h5>
-              <small>Returns comment for article</small>
-            
-              <h5>POST /api/articles/:article_id/addcomment</h5>
-              <small>Adds comment</small>
-              
-              <h5>DELETE /api/articles/:article_id/:comment_id</h5>
-              <small>Deletes comment</small>
-              
-              <h5>PUT /api/articles/:article_id/:comment_id?vote=up</h5>
-              <small>Vote comment up</small>
-              
-              <h5>PUT /api/articles/:article_id/:comment_id?vote=down</h5>
-              <small>Vote comment down</small>
-              
-              <h5>DELETE /api/articles/:article_id/:comment_id</h5>
-              <small>Deletes comment</small>
-              
-              <h3>User's Endpoint</h3>
-              <h5>Get /api/users</h5>
-              <small>Returns all the userst</small>
-              
-              <h5>Get /api/users/:user_name</h5>
-              <small>Returns the userst</small>
-              
-              <h5>POST /api/users/add</h5>
-              <small>Add User</small>
-              
-              <h5>PUT /api/users/:user_id</h5>
-              <small>Updates User</small>
-              
-              <h5>DELETE /api/users/:user_id</h5>
-              <small>Deletes User</small>
-          </div>  <!--  class="jumbotron" -->
-        </div>  <!--  "col-lg-6" -->
+
     </div>  <!--  class="row" -->
   </div>  <!--  class="container" -->
 </body>
