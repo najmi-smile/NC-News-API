@@ -56,7 +56,7 @@ module.exports ={
       } else {
         res.set(500).json({'error':'Please enter a valid vote'});
       }
-    } else if(!req.query) {
+    } else if(req.query === undefined) {
       const article = req.body;
       const update = {
         title : article.title,
