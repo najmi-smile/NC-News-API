@@ -244,5 +244,24 @@ describe ('api', () => {
         }
       });
     });
+    it('return error if wrong query given', () => {
+      return request.get('/api/articles').then(res => {
+        if(res.body.list_of_articles.length > 0) {
+          const article_id =  res.body.list_of_articles[0]._id;
+          return request.get(`/api/articles/${article_id}/comments`)
+            .then(res => {
+              if(res.body.list_of_comments.length > 0) {
+                const comment_id =  res.body.list_of_comments[0]._id;
+                return request.put(`/api/articles/${article_id}/${comment_id}?pote=down`)
+                  .expect(500)
+                  .then((res) => {
+                    expect(res.body).to.eql({'error':'Please enter a valid url/query'});
+                  });
+              }
+            });
+        }
+      });
+    });
+    
   });  //  comments
 });  //  api

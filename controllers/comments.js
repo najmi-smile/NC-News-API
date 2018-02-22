@@ -46,9 +46,9 @@ module.exports ={
           res.json(comment);
         }); 
       } else {
-        res.set(500).json('Please enter a valid query string');
+        res.set(500).json({'error':'Please enter a valid vote'});
       }
-    } else {
+    } else if(!req.query) {
       const article = req.body;
       const update = {
         title : article.title,
@@ -58,24 +58,14 @@ module.exports ={
         if (err) next(err);
         res.json(article);
       });
+    } else {
+      res.set(500).json({'error':'Please enter a valid url/query'});
     }
   },
   removeComment(req,res,next) {
     Comments.deleteOne({_id:req.params.comment_id}, (err, response) => {
       if(err) next(err);
       res.json(response);
-    });
-  },
-  updateComment(req,res,next) {
-    const _id = req.params.comment_id;
-    
-    const comment = req.body;
-    const update = {
-      body : comment.body
-    };
-    Comments.findOneAndUpdate(_id,update,{},(err, comment) => {
-      if (err) next(err);
-      res.json(comment);
     });
   }
 };
