@@ -50,23 +50,6 @@ describe ('api', () => {
         }
       });
     });
-    it('Update article', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
-          return request.put(`/api/articles/${id}`)
-            .send({
-              title:'tdd - update',
-              body:'tdd - body'
-            })
-            .expect(200)
-            .then(res => {
-              expect(res.body).to.be.an('object');
-              expect(res.body.title).to.equal('tdd - update');
-            });
-        }
-      });
-    });
     it('vote article up', () => {
       return request.get('/api/articles').then(res => {
         if(res.body.list_of_articles.length > 0) {
@@ -103,26 +86,11 @@ describe ('api', () => {
         }
       });
     });
-    it('return an error if given wrong url', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
-          return request.put(`/api/articles/${id}?bot=down`)
-            .expect(500)
-            .then(res =>{
-              expect(res.body).to.be.an('object');
-              expect(res.body.error).to.equal('Please enter a valid url/query');                  
-            });
-            
-        }
-      });
-    });
     it('return an error if given wrong query', () => {
       return request.get('/api/articles').then(res => {
         if(res.body.list_of_articles.length > 0) {
           const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
           return request.put(`/api/articles/${id}?vote=own`)
-            .expect(500)
             .then(res =>{
               expect(res.body).to.be.an('object');
               expect(res.body.error).to.equal('Please enter a valid vote');                  

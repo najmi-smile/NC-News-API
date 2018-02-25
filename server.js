@@ -1,4 +1,4 @@
-if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev';
+const env = process.env.NODE_ENV || 'dev';
 
 const express = require('express');
 const cors = require('cors');
@@ -12,9 +12,9 @@ const apiRouter = require('./routes/apiRouter');
 app.use(cors());
 
 let DB;
-if(process.env.NODE_ENV === 'dev'){
+if(env === 'dev'){
   DB = 'mongodb://localhost/northcoders-news-api';
-} else if (process.env.NODE_ENV === 'test') {
+} else if (env === 'test') {
   DB = 'mongodb://localhost/northcoders-news-api-test';
 }
 else DB = process.env.mLab;
