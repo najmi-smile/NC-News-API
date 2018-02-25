@@ -64,6 +64,10 @@ This will run a local server on port 3000. All endpoints can be found locally on
 
 To test the API navigate to the project directory and enter the following command
 
+```$ node seed/test.seed.js```
+
+and then
+
 ```$ npm test```
 
 Testing was carried out using Mocha, Chai and Supertest

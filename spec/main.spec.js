@@ -2,21 +2,27 @@ process.env.NODE_ENV = 'test';
 const {expect} = require('chai');
 const app = require('../server');
 const request = require('supertest')(app);
-describe ('api', () => {
+describe.only ('api', () => {
   describe('articles', () => {
-    it('Responds to GET request with an array of articles and 200 status', () => {
+    it('get request to articles', () => {
       return request
         .get('/api/articles')
-        .expect(200)
         .then(res => {
           expect(res.body.list_of_articles).to.be.an('Array');
+          expect(res.statusCode).to.equal(200);
+          expect(res.ok).to.equal(true);
+          expect(res.type).to.equal('application/json');
         });
     });
     it('return error when Request to undefined route', () => {
       return request
         .get('/api/article')
-        .expect(404)
         .then(res => {
+          expect(res.accepted).to.equal(false);
+          expect(res.statusType).to.equal(4);
+          expect(res.statusCode).to.equal(404);
+          expect(res.error.path).to.equal('/api/article');
+          expect(res.type).to.equal('text/html');
           expect(res.body).to.be.an('object');
         });
     });
@@ -24,15 +30,15 @@ describe ('api', () => {
       return request
         .post('/api/articles/add')
         .send({
-          "title": "Tahir",
-          "body": null,
-          "created_by": "raza1",
-          "belongs_to": "football",
-          "votes": 11
+          'title': 'Tahir',
+          'body': null,
+          'created_by': 'raza1',
+          'belongs_to': 'football',
+          'votes': 11
         })
         .set('Accept','application/json')
-        .expect(200)
         .then(res => {
+          expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.created_by).to.equal('raza1');
         });
