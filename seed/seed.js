@@ -16,7 +16,7 @@ let DB;
 if(process.env.NODE_ENV === 'dev'){
   DB = 'mongodb://localhost/northcoders-news-api';
 } else if (process.env.NODE_ENV === 'test') {
-  DB = 'mongodb://localhost/northcoders-news-api-test';
+  DB = 'mongodb://localhost/northcoders-news-api';
 }
 else DB = process.env.mLab;
 

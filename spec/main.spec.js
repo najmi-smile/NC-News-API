@@ -2,110 +2,7 @@ process.env.NODE_ENV = 'test';
 const {expect} = require('chai');
 const app = require('../server');
 const request = require('supertest')(app);
-describe.only ('api', () => {
-  describe('articles', () => {
-    it('get request to articles', () => {
-      return request
-        .get('/api/articles')
-        .then(res => {
-          expect(res.body.list_of_articles).to.be.an('Array');
-          expect(res.statusCode).to.equal(200);
-          expect(res.ok).to.equal(true);
-          expect(res.type).to.equal('application/json');
-        });
-    });
-    it('return error when Request to undefined route', () => {
-      return request
-        .get('/api/article')
-        .then(res => {
-          expect(res.accepted).to.equal(false);
-          expect(res.statusType).to.equal(4);
-          expect(res.statusCode).to.equal(404);
-          expect(res.error.path).to.equal('/api/article');
-          expect(res.type).to.equal('text/html');
-          expect(res.body).to.be.an('object');
-        });
-    });
-    it('Post a new article', () => {
-      return request
-        .post('/api/articles/add')
-        .send({
-          'title': 'Tahir',
-          'body': null,
-          'created_by': 'raza1',
-          'belongs_to': 'football',
-          'votes': 11
-        })
-        .set('Accept','application/json')
-        .then(res => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.created_by).to.equal('raza1');
-        });
-    });
-    it('Delete new article', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
-          return request.delete(`/api/articles/${id}`)
-            .expect(200)
-            .then(res => {
-              expect(res.body).to.be.an('object');
-              expect(res.body.ok).to.equal(1);
-            });
-        }
-      });
-    });
-    it('vote article up', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
-          const votes = res.body.list_of_articles[res.body.list_of_articles.length - 1].votes;
-          return request.put(`/api/articles/${id}?vote=up`)
-            .expect(200)
-            .then(() => {
-              return request.get(`/api/articles/${id}`)
-                .expect(200)
-                .then(res =>{
-                  expect(res.body).to.be.an('object');
-                  expect(res.body.votes).to.equal(votes+1);                  
-                });
-            });
-        }
-      });
-    });
-    it('vote article down', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
-          const votes = res.body.list_of_articles[res.body.list_of_articles.length - 1].votes;
-          return request.put(`/api/articles/${id}?vote=down`)
-            .expect(200)
-            .then(() => {
-              return request.get(`/api/articles/${id}`)
-                .expect(200)
-                .then(res =>{
-                  expect(res.body).to.be.an('object');
-                  expect(res.body.votes).to.equal(votes-1);                  
-                });
-            });
-        }
-      });
-    });
-    it('return an error if given wrong query', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
-          return request.put(`/api/articles/${id}?vote=own`)
-            .then(res =>{
-              expect(res.body).to.be.an('object');
-              expect(res.body.error).to.equal('Please enter a valid vote');                  
-            });
-            
-        }
-      });
-    });
-  });  //  Articles
+describe ('api', () => {
   describe('topics', ( )=> {
     it('Responds with an object of topics and 200 status', () => {
       return request
@@ -142,100 +39,13 @@ describe.only ('api', () => {
           expect(res.body).to.be.an('object');
         });
     });
-    it('Through a error if resource not found', () => {
+    it('Throw an error if resource not found', () => {
       return request
         .get('/api/users/northcoders')
-        .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body).to.eql({ error: 'Resource not found' });
         });
     });
   }); //  Users
-  describe('comments', ()=>{  
-    it('Get Request to api/articles/getbyid/comments', () => {
-      return request
-        .get('/api/articles/5a48e2bfae21fcf62286f091/comments')
-        .expect(200)
-        .then(res => {
-          expect(res.body).to.be.an('object');
-          expect(res.body.list_of_comments).to.be.an('array');
-        });
-    }); 
-    it('throw an error if rout does not exists', () => {
-      return request
-        .get('/api/articles/5a48e2bfae21fcf62286f091/comment')
-        .expect(500)
-        .then(res => {
-          expect(res.body).to.be.an('object');
-        });
-    }); 
-    it('vote comment up', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const article_id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
-          return request.get(`/api/articles/${article_id}/comments`)
-            .then(res => {
-              if(res.body.list_of_comments.length > 0) {
-                const comment_id =  res.body.list_of_comments[res.body.list_of_comments.length - 1]._id;
-                const votes = res.body.list_of_comments[res.body.list_of_comments.length - 1].votes;
-                return request.put(`/api/articles/${article_id}/${comment_id}?vote=up`)
-                  .expect(200)
-                  .then(() => {
-                    return request.get(`/api/articles/${article_id}/${comment_id}`)
-                      .expect(200)
-                      .then(res =>{
-                        expect(res.body).to.be.an('object');
-                        expect(res.body.votes).to.equal(votes+1);                  
-                      });
-                  });
-              }
-            });
-        }
-      });
-    });
-    it('vote comment down', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const article_id =  res.body.list_of_articles[res.body.list_of_articles.length - 1]._id;
-          return request.get(`/api/articles/${article_id}/comments`)
-            .then(res => {
-              if(res.body.list_of_comments.length > 0) {
-                const comment_id =  res.body.list_of_comments[res.body.list_of_comments.length - 1]._id;
-                const votes = res.body.list_of_comments[res.body.list_of_comments.length - 1].votes;
-                return request.put(`/api/articles/${article_id}/${comment_id}?vote=down`)
-                  .expect(200)
-                  .then(() => {
-                    return request.get(`/api/articles/${article_id}/${comment_id}`)
-                      .expect(200)
-                      .then(res =>{
-                        expect(res.body).to.be.an('object');
-                        expect(res.body.votes).to.equal(votes-1);                  
-                      });
-                  });
-              }
-            });
-        }
-      });
-    });
-    it('return error if wrong query given', () => {
-      return request.get('/api/articles').then(res => {
-        if(res.body.list_of_articles.length > 0) {
-          const article_id =  res.body.list_of_articles[0]._id;
-          return request.get(`/api/articles/${article_id}/comments`)
-            .then(res => {
-              if(res.body.list_of_comments.length > 0) {
-                const comment_id =  res.body.list_of_comments[0]._id;
-                return request.put(`/api/articles/${article_id}/${comment_id}?pote=down`)
-                  .expect(500)
-                  .then((res) => {
-                    expect(res.body).to.eql({'error':'Please enter a valid url/query'});
-                  });
-              }
-            });
-        }
-      });
-    });
-    
-  });  //  comments
 });  //  api

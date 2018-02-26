@@ -12,12 +12,9 @@ const apiRouter = require('./routes/apiRouter');
 app.use(cors());
 
 let DB;
-if(env === 'dev'){
+if(env !== 'production'){
   DB = 'mongodb://localhost/northcoders-news-api';
-} else if (env === 'test') {
-  DB = 'mongodb://localhost/northcoders-news-api-test';
-}
-else DB = process.env.mLab;
+} 
 
 mongoose.connect(DB, {useMongoClient: true})
   .then(() => console.log('successfully connected to remote database'))
