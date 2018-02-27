@@ -42,4 +42,11 @@ app.use((err, req, res, next) => {
   res.status(500).send(err);
 });
 
+// process.on('SIGINT', function() {  
+//   mongoose.connection.close(function () { 
+//     console.log('Mongoose default connection disconnected through app termination'); 
+//     process.exit(0); 
+//   }); 
+// }); 
+
 module.exports = app;

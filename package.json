@@ -4,7 +4,7 @@
   "description": "### Backend API",
   "main": "index.js",
   "scripts": {
-    "test": "mocha spec",
+    "test": "mocha spec/main.spec.js",
     "start": "node index.js",
     "seed": "node seed/seed.js"
   },
